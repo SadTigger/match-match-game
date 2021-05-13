@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Game Settings</title>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <div class="upper-logo">match</div>
+      <div class="lower-logo">match</div>
+    </div>
+    <nav>
+      <ul>
+        <li>
+          <div class="empty-card"></div>
+        </li>
+        <li>
+          <div class="navbar__card">
+            <img src="../../assets/icons/about.svg" alt="about">
+            <a href="../about/index.html">About Game</a>
+          </div>
+        </li>
+        <li>
+          <div class="navbar__card">
+            <img src="../../assets/icons/scores.svg" alt="scores">
+            <a href="#scores">Best Score</a>
+          </div>
+        </li>
+        <li>
+          <div class="navbar__card active">
+            <img src="../../assets/icons/settings.svg" alt="settings">
+            <a href="../settings/index.html">Game Settings</a>
+          </div>
+        </li>
+        <li>
+          <div class="empty-card"></div>
+        </li>
+        <li>
+          <div class="empty-card"></div>
+        </li>
+      </ul>
+    </nav>
+    <!-- TODO -->
+    <!-- button and icon after login -->
+    <div class="header_btn">
+      <a href="#">register new player</a>
+    </div>
+  </header>
+
+  <section class="settings">
+    <div class="game-settings">
+      <div class="settings-container">
+        <div class="game-cards setting">
+          <div class="setting__title">Game cards</div>
+          <div class="setting__select">
+            <select name="cards" id="cadrs">
+              <option value="" disabled selected>select game cards type</option>
+              <option value="animals">animals</option>
+              <option value="taro">taro</option>
+            </select>
+          </div>
+        </div>
+        <div class="difficulty setting">
+          <div class="setting__title">Difficulty</div>
+          <div class="setting__select">
+            <select name="difficulty" id="difficulty">
+              <option value="" disabled selected>select game type</option>
+              <option value="light">light</option>
+              <option value="medium">medium</option>
+              <option value="hard">hard</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
