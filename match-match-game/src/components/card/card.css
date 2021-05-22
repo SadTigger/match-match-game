@@ -1,0 +1,108 @@
+.card-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  perspective: 25rem;
+  cursor: pointer;
+}
+
+.card-container:hover > .card {
+  transform: translateZ(2rem);
+  box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.5);
+}
+
+.card {
+  width: 168px;
+  height: 168px;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2), 0px 3px 4px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.14);
+  position: relative;
+  transform-style: preserve-3d;
+  transform-origin: right;
+  transition: all .5s;
+  border-radius: 4px;
+}
+
+.card-front, .card-back {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  backface-visibility: hidden;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.card-back {
+  background: #FFFFFF;
+}
+
+.card-front {
+  transform: rotateY(180deg);
+  background-image: url("../../assets/images/game/default-back.png");
+}
+
+
+.card-container.flipped > .card {
+  transform: rotateY(180deg) translateX(-100%);
+  transform-origin: left;
+}
+
+/* .card-container.flipped .card-front,
+.card-container.flipped .match,
+.card-container.flipped .discrepancy,
+.card:hover .card-front,
+.card:hover .match,
+.card:hover .discrepancy {
+  display: block;
+} */
+
+.mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+.match {
+  display: none;	
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 207, 131, 0.5)
+}
+
+.discrepancy {
+  display: none;	
+  width: 100%;
+  height: 100%;
+  background: rgba(242, 78, 30, 0.5)
+}
+
+
+.icon-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.mask-icon {
+  margin-top: 10px;
+  margin-right: 11px;
+}
+
+.match .mask-icon {
+  width: 20px;
+  height: 20px;
+  background-image: url("../../assets/images/game/matching.svg");
+  background-size: cover;
+}
+
+.discrepancy .mask-icon {
+  width: 20px;
+  height: 20px;
+  background-image: url("../../assets/images/game/discrepancy.svg");
+  background-size: cover;
+}

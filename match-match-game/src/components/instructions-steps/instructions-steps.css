@@ -1,0 +1,6 @@
+.steps {
+  height: 642px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

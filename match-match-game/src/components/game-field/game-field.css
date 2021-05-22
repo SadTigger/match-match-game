@@ -1,0 +1,12 @@
+.game-field__container {
+  padding-top: 60px;
+  display: flex;
+  justify-content: center;
+}
+
+.game-field {
+  display: grid;
+  grid-template-columns:  repeat(4, auto);
+  column-gap: 24px;
+  row-gap: 14px;
+}
