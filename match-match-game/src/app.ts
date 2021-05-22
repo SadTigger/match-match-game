@@ -1,5 +1,7 @@
+import { throws } from 'assert/strict';
 import { About } from './components/about/about';
 import { Game } from './components/game/game';
+import { Scores } from './components/scores/scores';
 import { ImageCategoryModel } from './models/image-category-model';
 
 export class App {
@@ -7,11 +9,15 @@ export class App {
 
   private readonly game: Game;
 
+  private readonly scores: Scores;
+
   constructor(private readonly rootElement: HTMLElement) {
     this.about = new About();
     this.game = new Game();
-    this.rootElement.appendChild(this.game.element);
+    this.scores = new Scores();
+    // this.rootElement.appendChild(this.game.element);
     // this.rootElement.appendChild(this.about.element);
+    this.rootElement.appendChild(this.scores.element);
   }
 
   async start(): Promise<void> {

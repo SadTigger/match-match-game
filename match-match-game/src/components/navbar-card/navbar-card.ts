@@ -18,7 +18,7 @@ export class NavBarCard extends BaseComponent {
     <span>${this.title}</span>`;
   }
 
-  setActive() {
+  setActive(): void {
     this.element.classList.add('active');
   }
 }

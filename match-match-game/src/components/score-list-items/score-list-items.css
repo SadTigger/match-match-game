@@ -1,0 +1,7 @@
+.score-list__items {
+  width: 846px;
+  height: 660px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
