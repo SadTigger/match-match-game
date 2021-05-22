@@ -230,7 +230,7 @@ a:link{
   border-radius: 4px;
 }
 
-.card.flipped {
+.flipped > .card {
   transform: rotateY(180deg) translateX(-100%);
   transform-origin: left;
 }
@@ -256,9 +256,9 @@ a:link{
   transform: rotateY(180deg);
 }
 
-.card.flipped .card-front,
-.card.flipped .match,
-.card.flipped .discrepancy,
+.flipped .card-front,
+.flipped .match,
+.flipped .discrepancy,
 .card:hover .card-front,
 .card:hover .match,
 .card:hover .discrepancy {
