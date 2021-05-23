@@ -18,10 +18,10 @@ export class App {
     this.game = new Game();
     this.scores = new Scores();
     this.settings = new Settings();
-    // this.rootElement.appendChild(this.game.element);
+    this.rootElement.appendChild(this.game.element);
     // this.rootElement.appendChild(this.about.element);
     // this.rootElement.appendChild(this.scores.element);
-    this.rootElement.appendChild(this.settings.element);
+    // this.rootElement.appendChild(this.settings.element);
   }
 
   async start(): Promise<void> {

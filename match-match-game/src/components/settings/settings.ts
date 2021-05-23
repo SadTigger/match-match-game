@@ -1,3 +1,4 @@
+import { EmptyNavbarCard } from '../empty-navbar-card/empty-navbar-card';
 import { BaseComponent } from '../base-component';
 import { GameSettingsContainer } from '../game-settings-container/game-settings-container';
 import { GameSettings } from '../game-settings/game-settings';
@@ -8,9 +9,24 @@ import { SettingItem } from '../setting-item/setting-item';
 import { SettingDropdown } from '../setting-dropdown/setting-dropdown';
 import { Option } from '../option/option';
 import { Select } from '../select/select';
+import { Navbar } from '../navbar/navbar';
+import { NavBarCard } from '../navbar-card/navbar-card';
+import { NavbarCardList } from '../navbar-card-list/navbar-card-list';
 
 export class Settings extends BaseComponent {
   private readonly header: Header;
+
+  private readonly navbar: Navbar;
+
+  private readonly navbarCardList: NavbarCardList;
+
+  private readonly emptyNavbarCard: EmptyNavbarCard;
+
+  private readonly aboutNavbarCard: NavBarCard;
+
+  private readonly settingsNavbarCard: NavBarCard;
+
+  private readonly scoresNavbarCard: NavBarCard;
 
   private readonly logo: Logo;
 
@@ -44,8 +60,25 @@ export class Settings extends BaseComponent {
 
   constructor() {
     super();
+    // header
     this.header = new Header();
+    this.navbar = new Navbar();
+    this.navbarCardList = new NavbarCardList();
+    this.emptyNavbarCard = new EmptyNavbarCard();
+    this.aboutNavbarCard = new NavBarCard('about', 'About Game', '#');
+    this.settingsNavbarCard = new NavBarCard('scores', 'Best Scores', '#');
+    this.scoresNavbarCard = new NavBarCard('settings', 'Game Settings', '#');
     this.logo = new Logo();
+    this.header.addLogo(this.logo);
+    this.header.addNavigation(this.navbar);
+    this.navbar.element.appendChild(this.navbarCardList.element);
+    this.navbarCardList.addItems([
+      this.emptyNavbarCard.element,
+      this.aboutNavbarCard.element,
+      this.settingsNavbarCard.element,
+      this.scoresNavbarCard.element,
+    ]);
+    // page
     this.page = new Page();
     this.gameSettings = new GameSettings();
     this.gameSettingsContainer = new GameSettingsContainer();
@@ -75,7 +108,6 @@ export class Settings extends BaseComponent {
     this.settingDropdown2.addSelect(this.select2);
     this.select2.addOptions([this.option3, this.option4, this.option5]);
     this.element.appendChild(this.header.element);
-    this.header.addLogo(this.logo);
     this.element.appendChild(this.page.element);
     this.page.addToPage(this.gameSettings.element);
     this.gameSettings.element.appendChild(this.gameSettingsContainer.element);

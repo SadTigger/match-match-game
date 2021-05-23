@@ -10,11 +10,27 @@ import { PageWrapper } from '../page-wrapper/page-wrapper';
 import { Header } from '../header/header';
 import { Logo } from '../logo/logo';
 import { Page } from '../page/page';
+import { Navbar } from '../navbar/navbar';
+import { NavbarCardList } from '../navbar-card-list/navbar-card-list';
+import { EmptyNavbarCard } from '../empty-navbar-card/empty-navbar-card';
+import { NavBarCard } from '../navbar-card/navbar-card';
 
 const FLIP_DELAY = 3000;
 
 export class Game extends BaseComponent {
   private readonly header: Header;
+
+  private readonly navbar: Navbar;
+
+  private readonly navbarCardList: NavbarCardList;
+
+  private readonly emptyNavbarCard: EmptyNavbarCard;
+
+  private readonly aboutNavbarCard: NavBarCard;
+
+  private readonly settingsNavbarCard: NavBarCard;
+
+  private readonly scoresNavbarCard: NavBarCard;
 
   private readonly logo: Logo;
 
@@ -38,8 +54,26 @@ export class Game extends BaseComponent {
 
   constructor() {
     super();
+    // header
     this.header = new Header();
+    this.navbar = new Navbar();
     this.logo = new Logo();
+    this.navbarCardList = new NavbarCardList();
+    this.emptyNavbarCard = new EmptyNavbarCard();
+    this.aboutNavbarCard = new NavBarCard('about', 'About Game', '#');
+    this.settingsNavbarCard = new NavBarCard('scores', 'Best Scores', '#');
+    this.scoresNavbarCard = new NavBarCard('settings', 'Game Settings', '#');
+    this.element.appendChild(this.header.element);
+    this.header.addLogo(this.logo);
+    this.header.addNavigation(this.navbar);
+    this.navbar.element.appendChild(this.navbarCardList.element);
+    this.navbarCardList.addItems([
+      this.emptyNavbarCard.element,
+      this.aboutNavbarCard.element,
+      this.settingsNavbarCard.element,
+      this.scoresNavbarCard.element,
+    ]);
+    // page
     this.page = new Page();
     this.pageWrapper = new PageWrapper();
     this.pageContent = new PageContent();
@@ -47,8 +81,6 @@ export class Game extends BaseComponent {
     this.gameTimer = new Timer();
     this.gameFieldContainer = new GameFieldContainer();
     this.gameField = new GameField();
-    this.element.appendChild(this.header.element);
-    this.header.addLogo(this.logo);
     this.element.appendChild(this.page.element);
     this.page.addToPage(this.pageWrapper.element);
     this.pageWrapper.wrap(this.pageContent);

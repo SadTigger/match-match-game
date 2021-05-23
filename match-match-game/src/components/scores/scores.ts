@@ -1,6 +1,10 @@
 import { BaseComponent } from '../base-component';
+import { EmptyNavbarCard } from '../empty-navbar-card/empty-navbar-card';
 import { Header } from '../header/header';
 import { Logo } from '../logo/logo';
+import { NavbarCardList } from '../navbar-card-list/navbar-card-list';
+import { NavBarCard } from '../navbar-card/navbar-card';
+import { Navbar } from '../navbar/navbar';
 import { PageContent } from '../page-content/page-content';
 import { PageWrapper } from '../page-wrapper/page-wrapper';
 import { Page } from '../page/page';
@@ -12,6 +16,18 @@ import { ScoreList } from '../score-list/score-list';
 
 export class Scores extends BaseComponent {
   private readonly header: Header;
+
+  private readonly navbar: Navbar;
+
+  private readonly navbarCardList: NavbarCardList;
+
+  private readonly emptyNavbarCard: EmptyNavbarCard;
+
+  private readonly aboutNavbarCard: NavBarCard;
+
+  private readonly settingsNavbarCard: NavBarCard;
+
+  private readonly scoresNavbarCard: NavBarCard;
 
   private readonly logo: Logo;
 
@@ -55,8 +71,26 @@ export class Scores extends BaseComponent {
 
   constructor() {
     super();
+    // header
     this.header = new Header();
     this.logo = new Logo();
+    this.navbar = new Navbar();
+    this.element.appendChild(this.header.element);
+    this.header.addLogo(this.logo);
+    this.navbarCardList = new NavbarCardList();
+    this.emptyNavbarCard = new EmptyNavbarCard();
+    this.aboutNavbarCard = new NavBarCard('about', 'About Game', '#');
+    this.settingsNavbarCard = new NavBarCard('scores', 'Best Scores', '#');
+    this.scoresNavbarCard = new NavBarCard('settings', 'Game Settings', '#');
+    this.header.addNavigation(this.navbar);
+    this.navbar.element.appendChild(this.navbarCardList.element);
+    this.navbarCardList.addItems([
+      this.emptyNavbarCard.element,
+      this.aboutNavbarCard.element,
+      this.settingsNavbarCard.element,
+      this.scoresNavbarCard.element,
+    ]);
+    // page
     this.page = new Page();
     this.pageWrapper = new PageWrapper();
     this.pageContent = new PageContent();
@@ -131,8 +165,6 @@ export class Scores extends BaseComponent {
       169,
       '04',
     );
-    this.element.appendChild(this.header.element);
-    this.header.addLogo(this.logo);
     this.element.appendChild(this.page.element);
     this.page.addToPage(this.pageWrapper.element);
     this.pageWrapper.wrap(this.pageContent);
