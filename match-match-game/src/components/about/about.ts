@@ -51,7 +51,7 @@ export class About extends BaseComponent {
     this.element.appendChild(this.header.element);
     this.header.addLogo(this.logo);
     this.element.appendChild(this.page.element);
-    this.page.addToPage(this.pageWrapper);
+    this.page.addToPage(this.pageWrapper.element);
     this.pageWrapper.wrap(this.pageContent);
     this.pageContent.addContent([
       this.aboutTitle.element,

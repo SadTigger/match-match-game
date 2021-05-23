@@ -9,4 +9,5 @@
   grid-template-columns:  repeat(4, auto);
   column-gap: 24px;
   row-gap: 14px;
+  margin-bottom: 20px;
 }

@@ -50,7 +50,7 @@ export class Game extends BaseComponent {
     this.element.appendChild(this.header.element);
     this.header.addLogo(this.logo);
     this.element.appendChild(this.page.element);
-    this.page.addToPage(this.pageWrapper);
+    this.page.addToPage(this.pageWrapper.element);
     this.pageWrapper.wrap(this.pageContent);
     this.pageContent.addContent([
       this.gameTimerContainer.element,
@@ -60,11 +60,11 @@ export class Game extends BaseComponent {
     this.gameFieldContainer.addField(this.gameField);
   }
 
-  newGame(images: string[]): void {
+  newGame(images: string[], backImg: string): void {
     this.gameField.clear();
     const cards = images
       .concat(images)
-      .map(url => new Card(url))
+      .map(url => new Card(url, backImg))
       .sort(() => Math.random() - 0.5);
 
     cards.forEach(card => {

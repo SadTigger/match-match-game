@@ -134,7 +134,7 @@ export class Scores extends BaseComponent {
     this.element.appendChild(this.header.element);
     this.header.addLogo(this.logo);
     this.element.appendChild(this.page.element);
-    this.page.addToPage(this.pageWrapper);
+    this.page.addToPage(this.pageWrapper.element);
     this.pageWrapper.wrap(this.pageContent);
     this.pageContent.addContent([this.scoreList.element]);
     this.scoreList.addContent([

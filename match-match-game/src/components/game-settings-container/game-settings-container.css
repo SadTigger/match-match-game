@@ -1,0 +1,8 @@
+.game-settings-container {
+  padding: 32px 0px 0px 30px;
+  width: 256px;
+  height: 173px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

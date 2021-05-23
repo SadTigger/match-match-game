@@ -1,13 +1,30 @@
 [
   {
-    "category": "animals",
+    "category": "fate-servants",
     "images": [
-      "eagle.png",
-      "elephant.png",
-      "lion.png",
-      "penguin.png",
-      "tiger.png",
-      "wolf.png"
-    ]
+      "archer.jpg",
+      "assassin.jpg",
+      "berserker.jpg",
+      "caster.jpg",
+      "lancer.jpg",
+      "rider.jpg",
+      "saber.jpg",
+      "avenger.jpg"
+    ],
+    "back": "fate-back.jpg"
+  },
+  {
+    "category": "fgo",
+    "images": [
+      "enkidu.jpg",
+      "fool.jpg",
+      "gilgamesh.jpg",
+      "hassan.jpg",
+      "magician.jpg",
+      "order.jpg",
+      "solomon.jpg",
+      "world.jpg"
+    ],
+    "back": "fgo-back.jpg"
   }
 ]

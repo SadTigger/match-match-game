@@ -1,0 +1,18 @@
+option[value=""][disabled] {
+  display: none;
+}
+
+select {
+  width: 100%;
+  border: 0;
+  outline: none;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  align-items: center;
+  letter-spacing: 0.25px;
+  color: rgba(0, 0, 0, 0.6);
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
