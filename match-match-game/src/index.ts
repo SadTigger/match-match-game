@@ -8,7 +8,7 @@ window.onload = () => {
   if (!appElement) {
     throw new Error('App root element not found');
   } else {
-    // const app = new App(appElement);
-    const app = new App(appElement).start();
+    const app = new App(appElement);
+    // const app = new App(appElement).start();
   }
 };

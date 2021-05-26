@@ -1,0 +1,14 @@
+.registration-form__icon {
+  width: 198px;
+  height: 198px;
+  margin-left: 38px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  /* background-image: url(../../assets/icons/avatar.svg); */
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
+  overflow: hidden;
+}

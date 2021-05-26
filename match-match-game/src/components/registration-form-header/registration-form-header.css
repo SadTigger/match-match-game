@@ -1,0 +1,16 @@
+.registration-form__header {
+  width: 639px;
+  height: 67px;
+  background: #FFFFFF;
+  align-items: center;
+}
+
+.registration-form__title {
+  padding-top: 21px;
+  padding-left: 16px;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  letter-spacing: 0.15px;
+  color: rgba(0, 0, 0, 0.87);
+}

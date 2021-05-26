@@ -1,0 +1,7 @@
+.registration-form__frames {
+  width: 328px;
+  height: 204px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

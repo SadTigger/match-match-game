@@ -3,6 +3,12 @@ export interface AttributesModel {
   value: string;
 }
 
-// Usage
-// option: AttributesModel
-// {name: 'value', value: option.value}, {name: 'name', value: option.name}
+// Usage:
+// constructor(someVars: type,private option: AttributesModel )
+// super('tag',[classList], [
+//   { name: option.name, value: option.value }
+// ])
+//
+// constructor(private options: AttributesModel[] = [{name: 'name', value: 'value'}]) {
+//   super('tag', [classList], [...options]);
+// }

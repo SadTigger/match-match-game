@@ -1,5 +1,6 @@
 import { About } from './components/about/about';
 import { Game } from './components/game/game';
+import { Registration } from './components/registration/registration';
 import { Scores } from './components/scores/scores';
 import { Settings } from './components/settings/settings';
 import { ImageCategoryModel } from './models/image-category-model';
@@ -13,15 +14,19 @@ export class App {
 
   private readonly settings: Settings;
 
+  private readonly registration: Registration;
+
   constructor(private readonly rootElement: HTMLElement) {
     this.about = new About();
     this.game = new Game();
     this.scores = new Scores();
     this.settings = new Settings();
-    this.rootElement.appendChild(this.game.element);
+    this.registration = new Registration();
+    // this.rootElement.appendChild(this.game.element);
     // this.rootElement.appendChild(this.about.element);
     // this.rootElement.appendChild(this.scores.element);
     // this.rootElement.appendChild(this.settings.element);
+    this.rootElement.appendChild(this.registration.element);
   }
 
   async start(): Promise<void> {
