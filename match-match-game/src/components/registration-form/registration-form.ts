@@ -8,4 +8,8 @@ export class RegistrationForm extends BaseComponent {
   ) {
     super('form', ['registration-form'], [...options]);
   }
+
+  addContent(contentElements: HTMLElement[]): void {
+    contentElements.forEach(element => this.element.appendChild(element));
+  }
 }

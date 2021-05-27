@@ -8,6 +8,8 @@ import { Frame } from '../frame/frame';
 import { RegistrationFormIcon } from '../registration-form-icon/registration-form-icon';
 import { Avatar } from '../avatar/avatar';
 import { Button } from '../button/button';
+import { CancelButton } from '../cancel-button/cancel-button';
+import { PopupModal } from '../popup-modal/popup-modal';
 
 export class Registration extends BaseComponent {
   private readonly registrationForm: RegistrationForm;
@@ -36,9 +38,9 @@ export class Registration extends BaseComponent {
 
   private readonly addUserButton: Button;
 
-  private readonly cancelButton: Button;
+  private readonly cancelButton: CancelButton;
 
-  constructor() {
+  constructor(modal: PopupModal) {
     super();
     this.registrationForm = new RegistrationForm([
       { name: 'method', value: 'get' },
@@ -94,20 +96,16 @@ export class Registration extends BaseComponent {
       { name: 'form', value: 'reg-form' },
       { name: 'value', value: 'submit' },
     ]);
-    this.cancelButton = new Button('cancel', 'cancel-button');
+    this.cancelButton = new CancelButton(modal);
     this.registrationFormButtons.addButtons([
       this.addUserButton,
       this.cancelButton,
     ]);
     this.element.appendChild(this.registrationForm.element);
-    this.registrationForm.element.appendChild(
+    this.registrationForm.addContent([
       this.registrationFormHeader.element,
-    );
-    this.registrationForm.element.appendChild(
       this.registrationFormContent.element,
-    );
-    this.registrationForm.element.appendChild(
       this.registrationFormButtons.element,
-    );
+    ]);
   }
 }

@@ -12,6 +12,9 @@ import { StepsRow } from '../steps-row/steps-row';
 import { NavbarCardList } from '../navbar-card-list/navbar-card-list';
 import { EmptyNavbarCard } from '../empty-navbar-card/empty-navbar-card';
 import { NavBarCard } from '../navbar-card/navbar-card';
+import { HeaderButton } from '../header-button/header-button';
+import { Registration } from '../registration/registration';
+import { PopupModal } from '../popup-modal/popup-modal';
 
 export class About extends BaseComponent {
   private readonly header: Header;
@@ -29,6 +32,12 @@ export class About extends BaseComponent {
   private readonly scoresNavbarCard: NavBarCard;
 
   private readonly logo: Logo;
+
+  private readonly registrationButton: HeaderButton;
+
+  private readonly registration: Registration;
+
+  private readonly registrationPopupModal: PopupModal;
 
   private readonly page: Page;
 
@@ -54,6 +63,10 @@ export class About extends BaseComponent {
     this.header = new Header();
     this.navbar = new Navbar();
     this.logo = new Logo();
+    this.registrationPopupModal = new PopupModal();
+    this.registrationButton = new HeaderButton(this.registrationPopupModal);
+    this.registration = new Registration(this.registrationPopupModal);
+    this.registrationPopupModal.addModalContent(this.registration.element);
     this.element.appendChild(this.header.element);
     this.header.addLogo(this.logo);
     this.navbarCardList = new NavbarCardList();
@@ -62,6 +75,11 @@ export class About extends BaseComponent {
     this.settingsNavbarCard = new NavBarCard('scores', 'Best Scores', '#');
     this.scoresNavbarCard = new NavBarCard('settings', 'Game Settings', '#');
     this.header.addNavigation(this.navbar);
+    // TODO
+    // if (!registered)
+    this.header.addButton(this.registrationButton);
+    // else
+    // this.header.addButton(this.startGameButton);
     this.navbar.element.appendChild(this.navbarCardList.element);
     this.navbarCardList.addItems([
       this.emptyNavbarCard.element,
@@ -84,6 +102,7 @@ export class About extends BaseComponent {
     );
     this.element.appendChild(this.page.element);
     this.page.addToPage(this.pageWrapper.element);
+    this.page.addToPage(this.registrationPopupModal.element);
     this.pageWrapper.wrap(this.pageContent);
     this.pageContent.addContent([
       this.aboutTitle.element,
