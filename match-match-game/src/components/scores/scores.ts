@@ -9,7 +9,6 @@ import { PageContent } from '../page-content/page-content';
 import { PageWrapper } from '../page-wrapper/page-wrapper';
 import { Page } from '../page/page';
 import { Player } from '../player/player';
-// import { ScoreItem } from '../score-item/score-item';
 import { ScoreListItems } from '../score-list-items/score-list-items';
 import { ScoreListTitle } from '../score-list-title/score-list-title';
 import { ScoreList } from '../score-list/score-list';
@@ -43,8 +42,6 @@ export class Scores extends BaseComponent {
 
   private readonly scoreListItems: ScoreListItems;
 
-  // private readonly scoreItem: ScoreItem;
-
   private readonly firstPlayer: Player;
 
   private readonly secondPlayer: Player;
@@ -69,8 +66,8 @@ export class Scores extends BaseComponent {
 
   private readonly fourthPlayer2: Player;
 
-  constructor() {
-    super();
+  constructor(id: string) {
+    super('div', [id]);
     // header
     this.header = new Header();
     this.logo = new Logo();
@@ -79,9 +76,17 @@ export class Scores extends BaseComponent {
     this.header.addLogo(this.logo);
     this.navbarCardList = new NavbarCardList();
     this.emptyNavbarCard = new EmptyNavbarCard();
-    this.aboutNavbarCard = new NavBarCard('about', 'About Game', '#');
-    this.settingsNavbarCard = new NavBarCard('scores', 'Best Scores', '#');
-    this.scoresNavbarCard = new NavBarCard('settings', 'Game Settings', '#');
+    this.aboutNavbarCard = new NavBarCard('about', 'About Game', '#about-page');
+    this.settingsNavbarCard = new NavBarCard(
+      'scores',
+      'Best Scores',
+      '#scores-page',
+    );
+    this.scoresNavbarCard = new NavBarCard(
+      'settings',
+      'Game Settings',
+      '#settings-page',
+    );
     this.header.addNavigation(this.navbar);
     this.navbar.element.appendChild(this.navbarCardList.element);
     this.navbarCardList.addItems([

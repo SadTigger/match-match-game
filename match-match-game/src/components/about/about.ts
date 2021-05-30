@@ -57,8 +57,8 @@ export class About extends BaseComponent {
 
   private readonly thirdStep: StepsRow;
 
-  constructor() {
-    super();
+  constructor(id: string) {
+    super('div', [id]);
     // header
     this.header = new Header();
     this.navbar = new Navbar();
@@ -71,9 +71,17 @@ export class About extends BaseComponent {
     this.header.addLogo(this.logo);
     this.navbarCardList = new NavbarCardList();
     this.emptyNavbarCard = new EmptyNavbarCard();
-    this.aboutNavbarCard = new NavBarCard('about', 'About Game', '#');
-    this.settingsNavbarCard = new NavBarCard('scores', 'Best Scores', '#');
-    this.scoresNavbarCard = new NavBarCard('settings', 'Game Settings', '#');
+    this.aboutNavbarCard = new NavBarCard('about', 'About Game', '#about-page');
+    this.settingsNavbarCard = new NavBarCard(
+      'scores',
+      'Best Scores',
+      '#scores-page',
+    );
+    this.scoresNavbarCard = new NavBarCard(
+      'settings',
+      'Game Settings',
+      '#settings-page',
+    );
     this.header.addNavigation(this.navbar);
     // TODO
     // if (!registered)

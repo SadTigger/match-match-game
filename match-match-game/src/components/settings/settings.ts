@@ -58,16 +58,24 @@ export class Settings extends BaseComponent {
 
   private readonly option5: Option;
 
-  constructor() {
-    super();
+  constructor(id: string) {
+    super('div', [id]);
     // header
     this.header = new Header();
     this.navbar = new Navbar();
     this.navbarCardList = new NavbarCardList();
     this.emptyNavbarCard = new EmptyNavbarCard();
-    this.aboutNavbarCard = new NavBarCard('about', 'About Game', '#');
-    this.settingsNavbarCard = new NavBarCard('scores', 'Best Scores', '#');
-    this.scoresNavbarCard = new NavBarCard('settings', 'Game Settings', '#');
+    this.aboutNavbarCard = new NavBarCard('about', 'About Game', '#about-page');
+    this.settingsNavbarCard = new NavBarCard(
+      'scores',
+      'Best Scores',
+      '#scores-page',
+    );
+    this.scoresNavbarCard = new NavBarCard(
+      'settings',
+      'Game Settings',
+      '#settings-page',
+    );
     this.logo = new Logo();
     this.header.addLogo(this.logo);
     this.header.addNavigation(this.navbar);
