@@ -29,4 +29,9 @@ export class Header extends BaseComponent {
     this.headerButton = button;
     this.element.appendChild(this.headerButton.element);
   }
+
+  removeButton(button: HeaderButton): void {
+    this.headerButton = button;
+    this.element.removeChild(this.headerButton.element);
+  }
 }

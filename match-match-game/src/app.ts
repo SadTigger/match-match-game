@@ -3,7 +3,6 @@ import { ErrorPage, ErrorTypes } from './components/error-page/error-page';
 import { Game } from './components/game/game';
 import { Scores } from './components/scores/scores';
 import { Settings } from './components/settings/settings';
-import { ImageCategoryModel } from './models/image-category-model';
 
 export const enum PageIds {
   AboutPage = 'about-page',
@@ -15,20 +14,7 @@ export const enum PageIds {
 export class App {
   private static defaultPageId = 'current-page';
 
-  private readonly game: Game;
-
-  constructor(private readonly rootElement: HTMLElement) {
-    this.game = new Game('game-page');
-  }
-
-  async start(): Promise<void> {
-    const res = await fetch('./images.json');
-    const categories: ImageCategoryModel[] = await res.json();
-    const cat = categories[1];
-    const backImage = cat.back;
-    const images = cat.images.map(name => `${cat.category}/${name}`);
-    this.game.newGame(images, backImage);
-  }
+  constructor(private readonly rootElement: HTMLElement) {}
 
   private renderPage(idPage: string) {
     const currentPageHTML = document.querySelector(`#${App.defaultPageId}`);
@@ -47,7 +33,7 @@ export class App {
         page = new Settings(idPage);
         break;
       case idPage === PageIds.GamePage:
-        page = this.game;
+        page = new Game('game-page');
         break;
       default:
         page = new ErrorPage(idPage, ErrorTypes.Error_404);

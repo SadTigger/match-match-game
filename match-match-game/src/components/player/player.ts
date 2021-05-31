@@ -13,7 +13,7 @@ export class Player extends BaseComponent {
     <div class="player">
       <div class="player-profile">
         <div class="profile__icon">
-          <img src="../../assets/images/scores/${image}.png" alt="player avatar">
+          <img src="./assets/images/scores/${image}.png" alt="player avatar">
         </div>
         <div class="profile__info">
         <div class="profile__name">${name}</div>

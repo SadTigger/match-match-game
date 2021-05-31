@@ -14,8 +14,11 @@ import { Navbar } from '../navbar/navbar';
 import { NavbarCardList } from '../navbar-card-list/navbar-card-list';
 import { EmptyNavbarCard } from '../empty-navbar-card/empty-navbar-card';
 import { NavBarCard } from '../navbar-card/navbar-card';
+import { ImageCategoryModel } from '../../models/image-category-model';
+import { StartGameButton } from '../start-game-button/start-game-button';
+import { StopGameButton } from '../stop-game-button/stop-game-button';
 
-const FLIP_DELAY = 3000;
+const FLIP_DELAY = 15000;
 
 export class Game extends BaseComponent {
   private readonly header: Header;
@@ -33,6 +36,10 @@ export class Game extends BaseComponent {
   private readonly scoresNavbarCard: NavBarCard;
 
   private readonly logo: Logo;
+
+  private readonly stopGameButton: StopGameButton;
+
+  private readonly startGameButton: StartGameButton;
 
   private readonly page: Page;
 
@@ -58,6 +65,8 @@ export class Game extends BaseComponent {
     this.header = new Header();
     this.navbar = new Navbar();
     this.logo = new Logo();
+    this.stopGameButton = new StopGameButton();
+    this.startGameButton = new StartGameButton();
     this.navbarCardList = new NavbarCardList();
     this.emptyNavbarCard = new EmptyNavbarCard();
     this.aboutNavbarCard = new NavBarCard('about', 'About Game', '#about-page');
@@ -74,6 +83,18 @@ export class Game extends BaseComponent {
     this.element.appendChild(this.header.element);
     this.header.addLogo(this.logo);
     this.header.addNavigation(this.navbar);
+    this.header.addButton(this.stopGameButton);
+    this.header.addButton(this.startGameButton);
+    this.stopGameButton.element.addEventListener('click', () => {
+      this.stop();
+      this.stopGameButton.element.style.display = 'none';
+      this.startGameButton.element.style.display = 'block';
+    });
+    this.startGameButton.element.addEventListener('click', () => {
+      this.start();
+      this.stopGameButton.element.style.display = 'block';
+      this.startGameButton.element.style.display = 'none';
+    });
     this.navbar.element.appendChild(this.navbarCardList.element);
     this.navbarCardList.addItems([
       this.emptyNavbarCard.element,
@@ -139,5 +160,19 @@ export class Game extends BaseComponent {
 
     this.activeCard = undefined;
     this.isAnimation = false;
+  }
+
+  async start(): Promise<void> {
+    const res = await fetch('./images.json');
+    console.log('res', res);
+    const categories: ImageCategoryModel[] = await res.json();
+    const cat = categories[1];
+    const backImage = cat.back;
+    const images = cat.images.map(name => `${cat.category}/${name}`);
+    this.newGame(images, backImage);
+  }
+
+  stop(): void {
+    this.gameField.clear();
   }
 }

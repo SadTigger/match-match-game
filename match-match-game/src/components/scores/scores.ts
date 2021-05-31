@@ -102,7 +102,6 @@ export class Scores extends BaseComponent {
     this.scoreList = new ScoreList();
     this.scoreListTitle = new ScoreListTitle();
     this.scoreListItems = new ScoreListItems();
-    // this.scoreItem = new ScoreItem();
     this.firstPlayer = new Player(
       'Nicci Troiani',
       'nicci@gmail.com',

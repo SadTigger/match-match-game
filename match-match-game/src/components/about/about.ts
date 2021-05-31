@@ -87,6 +87,7 @@ export class About extends BaseComponent {
     // if (!registered)
     this.header.addButton(this.registrationButton);
     // else
+    // this.header.removeButton(this.registrationButton);
     // this.header.addButton(this.startGameButton);
     this.navbar.element.appendChild(this.navbarCardList.element);
     this.navbarCardList.addItems([
