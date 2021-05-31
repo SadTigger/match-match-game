@@ -7,9 +7,9 @@ import { RegistrationFormButtons } from '../registration-form-buttons/registrati
 import { Frame } from '../frame/frame';
 import { RegistrationFormIcon } from '../registration-form-icon/registration-form-icon';
 import { Avatar } from '../avatar/avatar';
-import { Button } from '../button/button';
 import { CancelButton } from '../cancel-button/cancel-button';
 import { PopupModal } from '../popup-modal/popup-modal';
+import { AddUserButton } from '../add-user-button/add-user-button';
 
 export class Registration extends BaseComponent {
   private readonly registrationForm: RegistrationForm;
@@ -36,7 +36,7 @@ export class Registration extends BaseComponent {
 
   private readonly registrationFormButtons: RegistrationFormButtons;
 
-  private readonly addUserButton: Button;
+  private readonly addUserButton: AddUserButton;
 
   private readonly cancelButton: CancelButton;
 
@@ -44,6 +44,7 @@ export class Registration extends BaseComponent {
     super();
     this.registrationForm = new RegistrationForm([
       { name: 'method', value: 'get' },
+      { name: 'action', value: '' },
       { name: 'id', value: 'reg-form' },
     ]);
     this.registrationFormHeader = new RegistrationFormHeader(
@@ -65,6 +66,7 @@ export class Registration extends BaseComponent {
     this.emailPattern =
       '^[a-zA-Z0-9.!#$%&&apos;*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$';
     this.firstNameFrame = new Frame(
+      'first_name',
       'First Name',
       'text',
       'Jessie',
@@ -72,6 +74,7 @@ export class Registration extends BaseComponent {
       'Name should start with letter. May contain letters and numbers.',
     );
     this.lastNameFrame = new Frame(
+      'last_name',
       'Last Name',
       'text',
       'Doe',
@@ -79,6 +82,7 @@ export class Registration extends BaseComponent {
       'Last name should start with letter. May contain letters and numbers.',
     );
     this.emailFrame = new Frame(
+      'email',
       'E-mail',
       'email',
       'Jessie.Doe@gmail.com',
@@ -91,12 +95,12 @@ export class Registration extends BaseComponent {
       this.emailFrame,
     ]);
     this.registrationFormButtons = new RegistrationFormButtons();
-    this.addUserButton = new Button('add user', 'add-button', [
+    this.addUserButton = new AddUserButton(modal, [
       { name: 'type', value: 'submit' },
       { name: 'form', value: 'reg-form' },
       { name: 'value', value: 'submit' },
     ]);
-    this.cancelButton = new CancelButton(modal);
+    this.cancelButton = new CancelButton();
     this.registrationFormButtons.addButtons([
       this.addUserButton,
       this.cancelButton,

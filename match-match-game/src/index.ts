@@ -10,6 +10,5 @@ window.onload = () => {
   } else {
     const app = new App(appElement);
     app.run();
-    // const app = new App(appElement).start();
   }
 };

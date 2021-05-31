@@ -3,6 +3,7 @@ import './frame.css';
 
 export class Frame extends BaseComponent {
   constructor(
+    private name: string,
     private frameTitle: string,
     private type: string,
     private placeholder: string,
@@ -15,6 +16,7 @@ export class Frame extends BaseComponent {
         <div class="frame-content">
           <p class="frame-content_title">${frameTitle}</p>
           <input 
+            name="${name}"
             type="${type}"
             placeholder="${placeholder}"
             autocomplete="off"
@@ -33,6 +35,7 @@ export class Frame extends BaseComponent {
         <div class="frame-content">
           <p class="frame-content_title">${frameTitle}</p>
           <input 
+            name="${name}"
             type="${type}"
             placeholder="${placeholder}"
             autocomplete="off"

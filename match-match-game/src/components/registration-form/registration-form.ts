@@ -7,6 +7,9 @@ export class RegistrationForm extends BaseComponent {
     private options: AttributesModel[] = [{ name: 'method', value: 'get' }],
   ) {
     super('form', ['registration-form'], [...options]);
+    this.element.addEventListener('submit', e => {
+      e.preventDefault();
+    });
   }
 
   addContent(contentElements: HTMLElement[]): void {
