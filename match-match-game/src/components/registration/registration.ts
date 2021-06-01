@@ -10,6 +10,8 @@ import { Avatar } from '../avatar/avatar';
 import { CancelButton } from '../cancel-button/cancel-button';
 import { PopupModal } from '../popup-modal/popup-modal';
 import { AddUserButton } from '../add-user-button/add-user-button';
+import { Header } from '../header/header';
+import { HeaderButton } from '../header-button/header-button';
 
 export class Registration extends BaseComponent {
   private readonly registrationForm: RegistrationForm;
@@ -40,7 +42,7 @@ export class Registration extends BaseComponent {
 
   private readonly cancelButton: CancelButton;
 
-  constructor(modal: PopupModal) {
+  constructor(header: Header, headerButton: HeaderButton, modal: PopupModal) {
     super();
     this.registrationForm = new RegistrationForm([
       { name: 'method', value: 'get' },
@@ -95,7 +97,7 @@ export class Registration extends BaseComponent {
       this.emailFrame,
     ]);
     this.registrationFormButtons = new RegistrationFormButtons();
-    this.addUserButton = new AddUserButton(modal, [
+    this.addUserButton = new AddUserButton(header, headerButton, modal, [
       { name: 'type', value: 'submit' },
       { name: 'form', value: 'reg-form' },
       { name: 'value', value: 'submit' },

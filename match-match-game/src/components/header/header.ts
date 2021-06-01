@@ -3,13 +3,14 @@ import { BaseComponent } from '../base-component';
 import { Logo } from '../logo/logo';
 import { Navbar } from '../navbar/navbar';
 import { HeaderButton } from '../header-button/header-button';
+import { StartGameLink } from '../start-game-link/start-game-link';
 
 export class Header extends BaseComponent {
   private logo?: Logo;
 
   private nav?: Navbar;
 
-  private headerButton?: HeaderButton;
+  private headerButton?: HeaderButton | StartGameLink;
 
   constructor() {
     super('header', ['header']);
@@ -25,7 +26,7 @@ export class Header extends BaseComponent {
     this.element.appendChild(this.nav.element);
   }
 
-  addButton(button: HeaderButton): void {
+  addButton(button: HeaderButton | StartGameLink): void {
     this.headerButton = button;
     this.element.appendChild(this.headerButton.element);
   }

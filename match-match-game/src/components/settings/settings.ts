@@ -12,6 +12,9 @@ import { Select } from '../select/select';
 import { Navbar } from '../navbar/navbar';
 import { NavBarCard } from '../navbar-card/navbar-card';
 import { NavbarCardList } from '../navbar-card-list/navbar-card-list';
+import { PopupModal } from '../popup-modal/popup-modal';
+import { HeaderButton } from '../header-button/header-button';
+import { Registration } from '../registration/registration';
 
 export class Settings extends BaseComponent {
   private readonly header: Header;
@@ -29,6 +32,12 @@ export class Settings extends BaseComponent {
   private readonly scoresNavbarCard: NavBarCard;
 
   private readonly logo: Logo;
+
+  private readonly registrationPopupModal: PopupModal;
+
+  private readonly registrationButton: HeaderButton;
+
+  private readonly registration: Registration;
 
   private readonly page: Page;
 
@@ -63,15 +72,30 @@ export class Settings extends BaseComponent {
     // header
     this.header = new Header();
     this.navbar = new Navbar();
+    this.registrationPopupModal = new PopupModal();
+    this.registrationButton = new HeaderButton(this.registrationPopupModal);
+    this.registration = new Registration(
+      this.header,
+      this.registrationButton,
+      this.registrationPopupModal,
+    );
+    this.registrationPopupModal.addModalContent(this.registration.element);
     this.navbarCardList = new NavbarCardList();
     this.emptyNavbarCard = new EmptyNavbarCard();
-    this.aboutNavbarCard = new NavBarCard('about', 'About Game', '#about-page');
-    this.settingsNavbarCard = new NavBarCard(
+    this.aboutNavbarCard = new NavBarCard(
+      '',
+      'about',
+      'About Game',
+      '#about-page',
+    );
+    this.scoresNavbarCard = new NavBarCard(
+      '',
       'scores',
       'Best Scores',
       '#scores-page',
     );
-    this.scoresNavbarCard = new NavBarCard(
+    this.settingsNavbarCard = new NavBarCard(
+      'active',
       'settings',
       'Game Settings',
       '#settings-page',
@@ -79,12 +103,18 @@ export class Settings extends BaseComponent {
     this.logo = new Logo();
     this.header.addLogo(this.logo);
     this.header.addNavigation(this.navbar);
+    // TODO
+    // if (!this.registered)
+    this.header.addButton(this.registrationButton);
+    // else
+    // this.header.removeButton(this.registrationButton);
+    // this.header.addButton(this.startGameButton);
     this.navbar.element.appendChild(this.navbarCardList.element);
     this.navbarCardList.addItems([
       this.emptyNavbarCard.element,
       this.aboutNavbarCard.element,
-      this.settingsNavbarCard.element,
       this.scoresNavbarCard.element,
+      this.settingsNavbarCard.element,
     ]);
     // page
     this.page = new Page();
@@ -118,6 +148,7 @@ export class Settings extends BaseComponent {
     this.element.appendChild(this.header.element);
     this.element.appendChild(this.page.element);
     this.page.addToPage(this.gameSettings.element);
+    this.page.addToPage(this.registrationPopupModal.element);
     this.gameSettings.element.appendChild(this.gameSettingsContainer.element);
     this.gameSettingsContainer.addSettings([
       this.settingItem1,

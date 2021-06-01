@@ -65,26 +65,37 @@ export class About extends BaseComponent {
     this.logo = new Logo();
     this.registrationPopupModal = new PopupModal();
     this.registrationButton = new HeaderButton(this.registrationPopupModal);
-    this.registration = new Registration(this.registrationPopupModal);
+    this.registration = new Registration(
+      this.header,
+      this.registrationButton,
+      this.registrationPopupModal,
+    );
     this.registrationPopupModal.addModalContent(this.registration.element);
     this.element.appendChild(this.header.element);
     this.header.addLogo(this.logo);
     this.navbarCardList = new NavbarCardList();
     this.emptyNavbarCard = new EmptyNavbarCard();
-    this.aboutNavbarCard = new NavBarCard('about', 'About Game', '#about-page');
+    this.aboutNavbarCard = new NavBarCard(
+      'active',
+      'about',
+      'About Game',
+      '#about-page',
+    );
     this.settingsNavbarCard = new NavBarCard(
+      '',
       'scores',
       'Best Scores',
       '#scores-page',
     );
     this.scoresNavbarCard = new NavBarCard(
+      '',
       'settings',
       'Game Settings',
       '#settings-page',
     );
     this.header.addNavigation(this.navbar);
     // TODO
-    // if (!registered)
+    // if (!this.registered)
     this.header.addButton(this.registrationButton);
     // else
     // this.header.removeButton(this.registrationButton);

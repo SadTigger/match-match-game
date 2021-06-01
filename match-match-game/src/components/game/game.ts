@@ -69,13 +69,20 @@ export class Game extends BaseComponent {
     this.startGameButton = new StartGameButton();
     this.navbarCardList = new NavbarCardList();
     this.emptyNavbarCard = new EmptyNavbarCard();
-    this.aboutNavbarCard = new NavBarCard('about', 'About Game', '#about-page');
-    this.settingsNavbarCard = new NavBarCard(
+    this.aboutNavbarCard = new NavBarCard(
+      '',
+      'about',
+      'About Game',
+      '#about-page',
+    );
+    this.scoresNavbarCard = new NavBarCard(
+      '',
       'scores',
       'Best Scores',
       '#scores-page',
     );
-    this.scoresNavbarCard = new NavBarCard(
+    this.settingsNavbarCard = new NavBarCard(
+      '',
       'settings',
       'Game Settings',
       '#settings-page',
@@ -99,8 +106,8 @@ export class Game extends BaseComponent {
     this.navbarCardList.addItems([
       this.emptyNavbarCard.element,
       this.aboutNavbarCard.element,
-      this.settingsNavbarCard.element,
       this.scoresNavbarCard.element,
+      this.settingsNavbarCard.element,
     ]);
     // page
     this.page = new Page();
@@ -164,7 +171,6 @@ export class Game extends BaseComponent {
 
   async start(): Promise<void> {
     const res = await fetch('./images.json');
-    console.log('res', res);
     const categories: ImageCategoryModel[] = await res.json();
     const cat = categories[1];
     const backImage = cat.back;

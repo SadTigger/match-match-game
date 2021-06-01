@@ -1,5 +1,6 @@
 import { BaseComponent } from '../base-component';
 import { EmptyNavbarCard } from '../empty-navbar-card/empty-navbar-card';
+import { HeaderButton } from '../header-button/header-button';
 import { Header } from '../header/header';
 import { Logo } from '../logo/logo';
 import { NavbarCardList } from '../navbar-card-list/navbar-card-list';
@@ -9,6 +10,8 @@ import { PageContent } from '../page-content/page-content';
 import { PageWrapper } from '../page-wrapper/page-wrapper';
 import { Page } from '../page/page';
 import { Player } from '../player/player';
+import { PopupModal } from '../popup-modal/popup-modal';
+import { Registration } from '../registration/registration';
 import { ScoreListItems } from '../score-list-items/score-list-items';
 import { ScoreListTitle } from '../score-list-title/score-list-title';
 import { ScoreList } from '../score-list/score-list';
@@ -29,6 +32,12 @@ export class Scores extends BaseComponent {
   private readonly scoresNavbarCard: NavBarCard;
 
   private readonly logo: Logo;
+
+  private readonly registrationPopupModal: PopupModal;
+
+  private readonly registrationButton: HeaderButton;
+
+  private readonly registration: Registration;
 
   private readonly page: Page;
 
@@ -72,28 +81,49 @@ export class Scores extends BaseComponent {
     this.header = new Header();
     this.logo = new Logo();
     this.navbar = new Navbar();
+    this.registrationPopupModal = new PopupModal();
+    this.registrationButton = new HeaderButton(this.registrationPopupModal);
+    this.registration = new Registration(
+      this.header,
+      this.registrationButton,
+      this.registrationPopupModal,
+    );
+    this.registrationPopupModal.addModalContent(this.registration.element);
     this.element.appendChild(this.header.element);
     this.header.addLogo(this.logo);
     this.navbarCardList = new NavbarCardList();
     this.emptyNavbarCard = new EmptyNavbarCard();
-    this.aboutNavbarCard = new NavBarCard('about', 'About Game', '#about-page');
-    this.settingsNavbarCard = new NavBarCard(
+    this.aboutNavbarCard = new NavBarCard(
+      '',
+      'about',
+      'About Game',
+      '#about-page',
+    );
+    this.scoresNavbarCard = new NavBarCard(
+      'active',
       'scores',
       'Best Scores',
       '#scores-page',
     );
-    this.scoresNavbarCard = new NavBarCard(
+    this.settingsNavbarCard = new NavBarCard(
+      '',
       'settings',
       'Game Settings',
       '#settings-page',
     );
     this.header.addNavigation(this.navbar);
+    // TODO
+    // if (!this.registered)
+    this.header.addButton(this.registrationButton);
+    // else
+    // this.header.removeButton(this.registrationButton);
+    // this.header.addButton(this.startGameButton);
     this.navbar.element.appendChild(this.navbarCardList.element);
     this.navbarCardList.addItems([
       this.emptyNavbarCard.element,
       this.aboutNavbarCard.element,
-      this.settingsNavbarCard.element,
       this.scoresNavbarCard.element,
+      this.settingsNavbarCard.element,
     ]);
     // page
     this.page = new Page();
@@ -171,6 +201,7 @@ export class Scores extends BaseComponent {
     );
     this.element.appendChild(this.page.element);
     this.page.addToPage(this.pageWrapper.element);
+    this.page.addToPage(this.registrationPopupModal.element);
     this.pageWrapper.wrap(this.pageContent);
     this.pageContent.addContent([this.scoreList.element]);
     this.scoreList.addContent([
