@@ -18,7 +18,7 @@ import { ImageCategoryModel } from '../../models/image-category-model';
 import { StartGameButton } from '../start-game-button/start-game-button';
 import { StopGameButton } from '../stop-game-button/stop-game-button';
 
-const FLIP_DELAY = 15000;
+const FLIP_DELAY = 3000;
 
 export class Game extends BaseComponent {
   private readonly header: Header;
