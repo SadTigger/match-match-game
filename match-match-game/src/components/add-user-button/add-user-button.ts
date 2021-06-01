@@ -10,9 +10,9 @@ export class AddUserButton extends Button {
       const validInputs: NodeListOf<HTMLInputElement> =
         document.querySelectorAll('input:valid');
       if (validInputs.length !== 3) return;
-      const userName = validInputs[0].value;
-      const userLastName = validInputs[1].value;
-      const userEmail = validInputs[2].value;
+      const {value: userName} = validInputs[0];
+      const {value: userLastName} = validInputs[1];
+      const {value: userEmail} = validInputs[2];
       modal.element.style.display = 'none';
       for (let index = 0; index < validInputs.length; index++) {
         validInputs[index].value = '';
