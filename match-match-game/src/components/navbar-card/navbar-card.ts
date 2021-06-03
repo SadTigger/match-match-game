@@ -9,17 +9,14 @@ export class NavBarCard extends BaseComponent {
     readonly linkAddress: string,
   ) {
     super('li', []);
-    // super('div', ['navbar-card']);
     this.state = state;
     this.name = name;
     this.title = title;
-    // {'about':'About Game', 'settings':'Setting', 'scores':'Best Scores'}
     this.linkAddress = linkAddress;
-    // {'about':'About page link', 'settings':'Settings page link', 'scores':'Best Scores page link'}
     this.element.innerHTML = `
     <a href=${this.linkAddress}>
      <div class="navbar-card ${this.state}">
-      <img src="./assets/icons/${this.name}.svg" alt="${this.name}">
+      <span class="card-icon" style="background-image: url('./assets/icons/${this.name}.svg')"></span>
       <span>${this.title}</span>
      </div>
     </a>
