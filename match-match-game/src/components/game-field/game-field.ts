@@ -9,9 +9,6 @@ export class GameField extends BaseComponent {
 
   constructor() {
     super('div', ['game-field']);
-    // this.element.innerHTML = `
-    // <div class="game-field">
-    // </div>`;
   }
 
   clear(): void {

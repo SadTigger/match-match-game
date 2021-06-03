@@ -89,7 +89,6 @@ export class Registration extends BaseComponent {
       'email',
       'Jessie.Doe@gmail.com',
       this.emailPattern,
-      // 'Email.',
     );
     this.registrationFormFrames.addFrames([
       this.firstNameFrame,

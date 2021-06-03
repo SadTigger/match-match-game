@@ -9,22 +9,30 @@ export class Player extends BaseComponent {
     private image: string,
   ) {
     super('div', ['score-item']);
-    this.element.innerHTML = `
+    this.element.innerHTML = Player.addPlayer(name, email, score, image);
+  }
+
+  static addPlayer(
+    name: string,
+    email: string,
+    score: number,
+    image: string,
+  ): string {
+    return `
     <div class="player">
-      <div class="player-profile">
+      <div class="player__profile">
         <div class="profile__icon">
           <img src="./assets/images/scores/${image}.png" alt="player avatar">
         </div>
         <div class="profile__info">
-        <div class="profile__name">${name}</div>
-        <div class="profile__email">${email}</div>
-      </div>
+          <div class="profile__name">${name}</div>
+          <div class="profile__email">${email}</div>
+        </div>
       </div>
       <div class="player-score">
-      Score:
-      <span class="player-score__value">${score}</span>
-    </div>
-   </div>
-    `;
+        Score:
+        <span class="player-score__value">${score}</span>
+      </div>
+    </div>`;
   }
 }

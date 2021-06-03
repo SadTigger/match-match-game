@@ -9,18 +9,27 @@ export class NavBarCard extends BaseComponent {
     readonly linkAddress: string,
   ) {
     super('li', []);
-    this.state = state;
-    this.name = name;
-    this.title = title;
-    this.linkAddress = linkAddress;
-    this.element.innerHTML = `
-    <a href=${this.linkAddress}>
-     <div class="navbar-card ${this.state}">
-      <span class="card-icon" style="background-image: url('./assets/icons/${this.name}.svg')"></span>
-      <span>${this.title}</span>
-     </div>
-    </a>
-    `;
+    this.element.innerHTML = NavBarCard.setCardContent(
+      state,
+      name,
+      title,
+      linkAddress,
+    );
+  }
+
+  static setCardContent(
+    state = '',
+    name: string,
+    title: string,
+    linkAddress: string,
+  ): string {
+    return `
+    <a href=${linkAddress}>
+      <div class="navbar-card ${state}">
+      <span class="card-icon" style="background-image: url(./assets/icons/${name}.svg)"></span>
+      <span>${title}</span>
+      </div>
+    </a>`;
   }
 
   setActive(): void {

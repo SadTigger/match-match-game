@@ -12,6 +12,10 @@ export class Option extends BaseComponent {
         { name: 'name', value: option.name },
       ],
     );
-    this.element.innerHTML = `${option.value}`;
+    this.element.innerHTML = Option.addOptionValue(option);
+  }
+
+  static addOptionValue(option: AttributesModel): string {
+    return `${option.value}`;
   }
 }

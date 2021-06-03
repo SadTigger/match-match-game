@@ -5,7 +5,11 @@ import './select.css';
 export class Select extends BaseComponent {
   constructor(private nameId: string, private defaultValue: string) {
     super('select', [], [{ name: `${nameId}`, value: `${nameId}` }]);
-    this.element.innerHTML = `<option value='' disabled selected>${defaultValue}</option>`;
+    this.element.innerHTML = Select.addSelectValue(defaultValue);
+  }
+
+  static addSelectValue(value: string): string {
+    return `<option value='' disabled selected>${value}</option>`;
   }
 
   addOptions(options: Option[]): void {

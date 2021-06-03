@@ -9,6 +9,10 @@ export class Button extends BaseComponent {
     private options: AttributesModel[] = [],
   ) {
     super('button', ['button', `${className}`], [...options]);
-    this.element.innerHTML = `${text}`;
+    this.element.innerHTML = Button.addButtonText(text);
+  }
+
+  static addButtonText(text: string): string {
+    return `${text}`;
   }
 }

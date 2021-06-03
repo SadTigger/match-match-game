@@ -1,5 +1,5 @@
 import { About } from './components/about/about';
-import { ErrorPage, ErrorTypes } from './components/error-page/error-page';
+import { ErrorPage } from './components/error-page/error-page';
 import { Game } from './components/game/game';
 import { Scores } from './components/scores/scores';
 import { Settings } from './components/settings/settings';
@@ -37,7 +37,6 @@ export class App {
         break;
       default:
         page = new ErrorPage(idPage);
-        page.getErrorTemplate(ErrorTypes.Error_404);
         break;
     }
 

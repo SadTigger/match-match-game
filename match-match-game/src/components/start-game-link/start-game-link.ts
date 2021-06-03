@@ -13,6 +13,10 @@ export class StartGameLink extends BaseComponent {
         },
       ],
     );
-    this.element.innerHTML = 'new game';
+    this.element.innerHTML = StartGameLink.addText();
+  }
+
+  static addText(text = 'new game'): string {
+    return `${text}`;
   }
 }

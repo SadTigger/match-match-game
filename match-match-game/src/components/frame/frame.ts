@@ -11,43 +11,46 @@ export class Frame extends BaseComponent {
     private hint: string = '',
   ) {
     super('div', ['frame']);
+    this.element.innerHTML = Frame.addFrameContent(
+      name,
+      frameTitle,
+      type,
+      placeholder,
+      pattern,
+      hint,
+    );
+  }
+
+  static addFrameContent(
+    name: string,
+    frameTitle: string,
+    type: string,
+    placeholder: string,
+    pattern: string,
+    hint = '',
+  ): string {
+    let fullTitle = '';
     if (hint.length !== 0) {
-      this.element.innerHTML = `
-        <div class="frame-content">
-          <p class="frame-content_title">${frameTitle}</p>
-          <input 
-            name="${name}"
-            type="${type}"
-            placeholder="${placeholder}"
-            autocomplete="off"
-            pattern=${pattern}
-            title="${hint}"
-            maxlength="30"
-            required
-          >
-          <div class="frame_validation">
-            <div class="frame_validation__check"></div>
-          </div>
-        </div>
-      `;
+      fullTitle = `title="${hint}"`;
     } else {
-      this.element.innerHTML = `
-        <div class="frame-content">
-          <p class="frame-content_title">${frameTitle}</p>
-          <input 
-            name="${name}"
-            type="${type}"
-            placeholder="${placeholder}"
-            autocomplete="off"
-            pattern=${pattern}
-            maxlength="30"
-            required
-          >
-          <div class="frame_validation">
-            <div class="frame_validation__check"></div>
-          </div>
-        </div>
-      `;
+      fullTitle = `${hint}`;
     }
+    return `
+    <div class="frame-content">
+      <p class="frame-content_title">${frameTitle}</p>
+      <input 
+        name="${name}"
+        type="${type}"
+        placeholder="${placeholder}"
+        autocomplete="off"
+        pattern=${pattern}
+        ${fullTitle}
+        maxlength="30"
+        required
+      >
+      <div class="frame_validation">
+        <div class="frame_validation__check"></div>
+      </div>
+    </div>`;
   }
 }

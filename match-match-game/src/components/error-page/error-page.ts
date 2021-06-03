@@ -29,15 +29,15 @@ export class ErrorPage extends BaseComponent {
     );
     this.page = new Page();
     this.element.appendChild(this.page.element);
+    this.element.innerHTML = ErrorPage.getErrorTemplate(ErrorTypes.Error_404);
   }
 
-  getErrorTemplate(errorType: ErrorTypes | string) {
-    this.element.innerHTML = `
+  static getErrorTemplate(errorType: ErrorTypes | string): string {
+    return `
     <div class="dialog">
       <p class="text">[404]</p>
       <p>${ErrorPage.TextObject[errorType]}</p>
       <a href='#about-page' class='button return-button'>go back</a>
-    </div>
-    `;
+    </div>`;
   }
 }

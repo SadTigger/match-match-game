@@ -6,17 +6,16 @@ const FLIP_CLASS = 'flipped';
 export class Card extends BaseComponent {
   isFlipped = false;
 
-  constructor(readonly image: string,readonly backImage: string) {
+  constructor(readonly image: string, readonly backImage: string) {
     super('div', ['card-container']);
-    this.element.innerHTML = `${this.getCardTemplate(image, backImage)}`
+    this.element.innerHTML = Card.getCardTemplate(image, backImage);
   }
 
-  getCardTemplate(image: string, backImage: string) {
+  static getCardTemplate(image: string, backImage: string): string {
     return `<div class="card">
-      <div class="card-back" style="background-image: url('./assets/images/${image}')"></div>
-      <div class="card-front" style="background-image: url('./assets/images/game/${backImage}')"></div>
-    </div>
-    `;
+      <div class="card-back" style="background-image: url(./assets/images/${image})"></div>
+      <div class="card-front" style="background-image: url(./assets/images/game/${backImage})"></div>
+    </div>`;
   }
 
   flipToBack(): Promise<void> {

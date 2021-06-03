@@ -16,10 +16,12 @@ export class Timer extends BaseComponent {
     super('div', ['timer']);
     this.minutes = '00';
     this.seconds = '01';
-    this.element.innerHTML = `
-    <div class="clock-face">
-      <span class="minutes">${this.minutes}</span>:<span class="seconds">${this.seconds}</span>
-    </div>
-    `;
+    this.element.innerHTML = Timer.addClockFace(this.minutes, this.seconds);
+  }
+
+  static addClockFace(minutes: string, seconds: string): string {
+    return `<div class="clock-face">
+      <span class="minutes">${minutes}</span>:<span class="seconds">${seconds}</span>
+    </div>`;
   }
 }
