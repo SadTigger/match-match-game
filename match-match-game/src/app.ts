@@ -36,7 +36,8 @@ export class App {
         page = new Game('game-page');
         break;
       default:
-        page = new ErrorPage(idPage, ErrorTypes.Error_404);
+        page = new ErrorPage(idPage);
+        page.getErrorTemplate(ErrorTypes.Error_404);
         break;
     }
 

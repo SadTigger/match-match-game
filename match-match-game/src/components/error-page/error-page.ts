@@ -7,7 +7,7 @@ export const enum ErrorTypes {
 }
 
 export class ErrorPage extends BaseComponent {
-  private errorType: ErrorTypes | string;
+  // private readonly errorType: ErrorTypes | string;
 
   private readonly page: Page;
 
@@ -15,7 +15,7 @@ export class ErrorPage extends BaseComponent {
     '404': 'Error! The page was not found.',
   };
 
-  constructor(id: string, errorType: ErrorTypes | string) {
+  constructor(id: string) {
     super(
       'div',
       [id],
@@ -27,13 +27,15 @@ export class ErrorPage extends BaseComponent {
         },
       ],
     );
-    this.errorType = errorType;
     this.page = new Page();
     this.element.appendChild(this.page.element);
+  }
+
+  getErrorTemplate(errorType: ErrorTypes | string) {
     this.element.innerHTML = `
     <div class="dialog">
       <p class="text">[404]</p>
-      <p>${ErrorPage.TextObject[this.errorType]}</p>
+      <p>${ErrorPage.TextObject[errorType]}</p>
       <a href='#about-page' class='button return-button'>go back</a>
     </div>
     `;
