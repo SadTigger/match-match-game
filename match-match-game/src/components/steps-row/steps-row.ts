@@ -9,7 +9,7 @@ export class StepsRow extends BaseComponent {
         <div class="step__image">
           <div class="number">${stepNumber}</div>
         </div>
-        <span>${text}</span>
+        <p>${text}</p>
       </div>
       <div class="image">
         <img src="./assets/images/about/${stepNumber}.png" alt="register">
