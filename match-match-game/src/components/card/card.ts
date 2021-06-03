@@ -8,7 +8,9 @@ export class Card extends BaseComponent {
 
   constructor(readonly image: string, readonly backImage: string) {
     super('div', ['card-container']);
-    this.element.innerHTML = Card.getCardTemplate(image, backImage);
+    this.image = image;
+    this.backImage = backImage;
+    this.element.innerHTML = Card.getCardTemplate(this.image, this.backImage);
   }
 
   static getCardTemplate(image: string, backImage: string): string {
@@ -16,6 +18,42 @@ export class Card extends BaseComponent {
       <div class="card-back" style="background-image: url(./assets/images/${image})"></div>
       <div class="card-front" style="background-image: url(./assets/images/game/${backImage})"></div>
     </div>`;
+  }
+
+  // <div class="card-front" style="background-image: url('../../assets/images/${image}')">
+  // <div class="mask">
+  //   <div class="icon-container">
+  //     <div class="mask-icon"></div>
+  //   </div>
+  // </div>
+
+  static getMaskTemplate(): string {
+    return `
+    <div class="mask">
+      <div class="icon-container">
+        <div class="mask-icon"></div>
+      </div>
+    </div>`;
+  }
+
+  setDiscrepancyMask(): void {
+    this.element.innerHTML += Card.getMaskTemplate();
+    this.element.classList.add('discrepancy');
+  }
+
+  setMatchMask(): void {
+    this.element.innerHTML += Card.getMaskTemplate();
+    this.element.classList.add('match');
+  }
+
+  removeDiscrepancyMask(): void {
+    this.element.classList.remove('discrepancy');
+    this.element.innerHTML = Card.getCardTemplate(this.image, this.backImage);
+  }
+
+  removeMatchMask(): void {
+    this.element.classList.remove('match');
+    this.element.innerHTML = Card.getCardTemplate(this.image, this.backImage);
   }
 
   flipToBack(): Promise<void> {

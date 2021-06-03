@@ -158,12 +158,20 @@ export class Game extends BaseComponent {
 
     if (this.activeCard.image !== card.image) {
       // TODO
-      // Add mask match at this.activeCard and card
+      // Add mask discrepancy at this.activeCard and card
+
+      this.activeCard.setDiscrepancyMask();
+      card.setDiscrepancyMask();
       await delay(FLIP_DELAY);
       await Promise.all([this.activeCard.flipToBack(), card.flipToBack()]);
+      this.activeCard.removeDiscrepancyMask();
+      card.removeDiscrepancyMask();
+    } else {
+      // TODO
+      // Add mask match at this.activeCard and card
+      this.activeCard.setMatchMask();
+      card.setMatchMask();
     }
-    // TODO
-    // Add mask discrepancy at this.activeCard and card
 
     this.activeCard = undefined;
     this.isAnimation = false;

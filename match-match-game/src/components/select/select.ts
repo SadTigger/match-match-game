@@ -6,7 +6,7 @@ export class Select extends BaseComponent {
   constructor(private nameId: string) {
     super('select', [`${nameId}`]);
   }
-  
+
   addOptions(options: Option[]): void {
     options.forEach(option => this.element.appendChild(option.element));
   }

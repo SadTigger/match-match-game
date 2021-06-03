@@ -33,7 +33,7 @@ export class App {
         page = new Settings(idPage);
         break;
       case idPage === PageIds.GamePage:
-        page = new Game('game-page');
+        page = new Game(idPage);
         break;
       default:
         page = new ErrorPage(idPage);
