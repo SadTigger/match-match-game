@@ -15,6 +15,7 @@ import { NavbarCardList } from '../navbar-card-list/navbar-card-list';
 import { PopupModal } from '../popup-modal/popup-modal';
 import { HeaderButton } from '../header-button/header-button';
 import { Registration } from '../registration/registration';
+import { ConfirmSettingsButton } from '../confirm-settings-button/confirm-settings-button';
 
 export class Settings extends BaseComponent {
   private readonly header: Header;
@@ -66,6 +67,8 @@ export class Settings extends BaseComponent {
   private readonly option4: Option;
 
   private readonly option5: Option;
+
+  private readonly confirmButton: ConfirmSettingsButton;
 
   constructor(id: string) {
     super('div', [id]);
@@ -124,7 +127,7 @@ export class Settings extends BaseComponent {
     this.settingDropdown1 = new SettingDropdown();
     this.settingItem1 = new SettingItem('Game cards');
     this.settingItem1.addDropdown(this.settingDropdown1);
-    this.select1 = new Select('cards', 'select game cards type');
+    this.select1 = new Select('cards');
     this.option1 = new Option({
       name: 'fate grand order',
       value: 'fate grand order',
@@ -139,7 +142,7 @@ export class Settings extends BaseComponent {
     this.settingDropdown2 = new SettingDropdown();
     this.settingItem2 = new SettingItem('Difficulty');
     this.settingItem2.addDropdown(this.settingDropdown2);
-    this.select2 = new Select('difficulty', 'select game type');
+    this.select2 = new Select('difficulty');
     this.option3 = new Option({ name: '4x4', value: '4x4' });
     this.option4 = new Option({ name: '6x6', value: '6x6' });
     this.option5 = new Option({ name: '8x8', value: '8x8' });
@@ -150,9 +153,11 @@ export class Settings extends BaseComponent {
     this.page.addToPage(this.gameSettings.element);
     this.page.addToPage(this.registrationPopupModal.element);
     this.gameSettings.element.appendChild(this.gameSettingsContainer.element);
+    this.confirmButton = new ConfirmSettingsButton();
     this.gameSettingsContainer.addSettings([
       this.settingItem1,
       this.settingItem2,
     ]);
+    this.gameSettingsContainer.addButton(this.confirmButton);
   }
 }
