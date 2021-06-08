@@ -1,3 +1,4 @@
+import { ClockFace } from '../clock-face/clock-face';
 import { GameFieldContainer } from '../game-field-container/game-field-container';
 import { delay } from '../../shared/delay';
 import { BaseComponent } from '../base-component';
@@ -17,6 +18,11 @@ import { NavBarCard } from '../navbar-card/navbar-card';
 import { ImageCategoryModel } from '../../models/image-category-model';
 import { StartGameButton } from '../start-game-button/start-game-button';
 import { StopGameButton } from '../stop-game-button/stop-game-button';
+import { EndGamePopup } from '../end-game-popup/end-game-popup';
+import { WinGameButton } from '../win-game-button/win-game-button';
+import { EndGameContent } from '../end-game-content/end-game-content';
+import { WinContainer } from '../win-container/win-container';
+import { TimeToString } from '../../shared/time-to-string';
 
 const FLIP_DELAY = 3000;
 
@@ -51,13 +57,35 @@ export class Game extends BaseComponent {
 
   private readonly gameTimer: Timer;
 
+  private readonly clockFace: ClockFace;
+
   private readonly gameFieldContainer: GameFieldContainer;
 
   private readonly gameField: GameField;
 
+  private readonly endGamePopup: EndGamePopup;
+
+  private readonly winGameButton: WinGameButton;
+
+  private readonly endGameContent: EndGameContent;
+
+  private readonly winContainer: WinContainer;
+
   private activeCard?: Card;
 
   private isAnimation = false;
+
+  private scores = 0;
+
+  private mistakes = 0;
+
+  private steps = 0;
+
+  private startTime = 0;
+
+  private elapsedTime = 0;
+
+  private timerInterval = 0;
 
   constructor(id: string) {
     super('div', [id]);
@@ -115,10 +143,19 @@ export class Game extends BaseComponent {
     this.pageContent = new PageContent();
     this.gameTimerContainer = new GameTimerContainer();
     this.gameTimer = new Timer();
+    this.clockFace = new ClockFace();
+    this.gameTimer.addClockFace(this.clockFace);
     this.gameFieldContainer = new GameFieldContainer();
     this.gameField = new GameField();
+    this.endGamePopup = new EndGamePopup();
+    this.endGameContent = new EndGameContent();
+    this.winGameButton = new WinGameButton();
+    this.winContainer = new WinContainer();
+    this.endGameContent.addContainer(this.winContainer);
+    this.endGamePopup.addModalContent(this.endGameContent);
     this.element.appendChild(this.page.element);
     this.page.addToPage(this.pageWrapper.element);
+    this.page.addToPage(this.endGamePopup.element);
     this.pageWrapper.wrap(this.pageContent);
     this.pageContent.addContent([
       this.gameTimerContainer.element,
@@ -140,6 +177,14 @@ export class Game extends BaseComponent {
     });
 
     this.gameField.addCards(cards);
+    setTimeout(() => {
+      // timer
+      this.startTime = Date.now() - this.elapsedTime;
+      this.timerInterval = window.setInterval(() => {
+        this.elapsedTime = Date.now() - this.startTime;
+        this.clockFace.changeTime(TimeToString(this.elapsedTime));
+      }, 10);
+    }, 15000); // 2000 - test, 15000 - game
   }
 
   private async cardHandler(card: Card) {
@@ -156,10 +201,10 @@ export class Game extends BaseComponent {
       return;
     }
 
-    if (this.activeCard.image !== card.image) {
-      // TODO
-      // Add mask discrepancy at this.activeCard and card
+    this.steps += 1;
 
+    if (this.activeCard.image !== card.image) {
+      this.mistakes += 1;
       this.activeCard.setDiscrepancyMask();
       card.setDiscrepancyMask();
       await delay(FLIP_DELAY);
@@ -167,17 +212,37 @@ export class Game extends BaseComponent {
       this.activeCard.removeDiscrepancyMask();
       card.removeDiscrepancyMask();
     } else {
-      // TODO
-      // Add mask match at this.activeCard and card
       this.activeCard.setMatchMask();
       card.setMatchMask();
     }
 
     this.activeCard = undefined;
     this.isAnimation = false;
+    const fieldLength = document.querySelectorAll('.card').length;
+    const matchedCards = document.querySelectorAll('.match').length;
+    if (fieldLength === matchedCards) {
+      this.endGamePopup.element.style.display = 'flex';
+      this.scores =
+        (this.steps - this.mistakes) * 100 -
+        Math.floor(this.elapsedTime * 0.001) * 10;
+      if (this.scores < 0) this.scores = 0;
+      clearInterval(this.timerInterval);
+      this.winContainer.addText(TimeToString(this.elapsedTime));
+      this.winContainer.addButton(this.winGameButton);
+      this.winGameButton.element.addEventListener('click', () => {
+        this.endGamePopup.element.style.display = 'none';
+        clearInterval(this.timerInterval);
+        this.stop();
+        this.stopGameButton.element.style.display = 'none';
+        this.startGameButton.element.style.display = 'block';
+      });
+    }
   }
 
   async start(): Promise<void> {
+    this.steps = 0;
+    this.mistakes = 0;
+    this.scores = 0;
     const res = await fetch('./images.json');
     const categories: ImageCategoryModel[] = await res.json();
     const cat = categories[1];
@@ -187,6 +252,12 @@ export class Game extends BaseComponent {
   }
 
   stop(): void {
+    this.steps = 0;
+    this.mistakes = 0;
+    this.scores = 0;
     this.gameField.clear();
+    clearInterval(this.timerInterval);
+    this.clockFace.changeTime('00:00');
+    this.elapsedTime = 0;
   }
 }

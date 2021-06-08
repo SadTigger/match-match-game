@@ -8,8 +8,6 @@ export class ConfirmSettingsButton extends Button {
       const cards: HTMLOptionElement = document.querySelector('.cards')!;
       const difficulty: HTMLOptionElement =
         document.querySelector('.difficulty')!;
-      console.log('cards', cards.value);
-      console.log('difficulty', difficulty.value);
     });
   }
 }
