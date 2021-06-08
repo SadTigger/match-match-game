@@ -25,6 +25,9 @@ import { WinContainer } from '../win-container/win-container';
 import { TimeToString } from '../../shared/time-to-string';
 
 const FLIP_DELAY = 3000;
+const TIMER_START = 15;
+// for tests
+// const TIMER_START = 2;
 
 export class Game extends BaseComponent {
   private readonly header: Header;
@@ -184,7 +187,7 @@ export class Game extends BaseComponent {
         this.elapsedTime = Date.now() - this.startTime;
         this.clockFace.changeTime(TimeToString(this.elapsedTime));
       }, 10);
-    }, 15000); // 2000 - test, 15000 - game
+    }, TIMER_START * 1000);
   }
 
   private async cardHandler(card: Card) {

@@ -5,7 +5,6 @@ const MIN_AND_SECONDS = 60;
 const DOUBLE_SYMBOL = 2;
 
 export function TimeToString(time: number): string {
-
   const diffInHrs = time / MS_TO_HOURS;
   const hh = Math.floor(diffInHrs);
 
