@@ -90,6 +90,10 @@ export class Game extends BaseComponent {
 
   private timerInterval = 0;
 
+  private startInterval = 0;
+
+  private count_down = 15;
+
   constructor(id: string) {
     super('div', [id]);
     // header
@@ -124,6 +128,7 @@ export class Game extends BaseComponent {
     this.header.addButton(this.stopGameButton);
     this.header.addButton(this.startGameButton);
     this.stopGameButton.element.addEventListener('click', () => {
+      clearInterval(this.timerInterval);
       this.stop();
       this.stopGameButton.element.style.display = 'none';
       this.startGameButton.element.style.display = 'block';
@@ -180,8 +185,21 @@ export class Game extends BaseComponent {
     });
 
     this.gameField.addCards(cards);
+
+    // count down
+    this.clockFace.changeTime('00:15');
+    this.startInterval = window.setInterval(() => {
+      this.count_down--;
+      if (this.count_down >= 10) {
+        this.clockFace.changeTime(`00:${this.count_down}`);
+      } else {
+        this.clockFace.changeTime(`00:0${this.count_down}`);
+      }
+      if (this.count_down <= 0) clearInterval(this.startInterval);
+    }, 1000);
+
+    // timer
     setTimeout(() => {
-      // timer
       this.startTime = Date.now() - this.elapsedTime;
       this.timerInterval = window.setInterval(() => {
         this.elapsedTime = Date.now() - this.startTime;
@@ -234,7 +252,6 @@ export class Game extends BaseComponent {
       this.winContainer.addButton(this.winGameButton);
       this.winGameButton.element.addEventListener('click', () => {
         this.endGamePopup.element.style.display = 'none';
-        clearInterval(this.timerInterval);
         this.stop();
         this.stopGameButton.element.style.display = 'none';
         this.startGameButton.element.style.display = 'block';
@@ -251,6 +268,9 @@ export class Game extends BaseComponent {
     const cat = categories[1];
     const backImage = cat.back;
     const images = cat.images.map(name => `${cat.category}/${name}`);
+    clearInterval(this.startInterval);
+    clearInterval(this.timerInterval);
+    this.clockFace.changeTime('00:00');
     this.newGame(images, backImage);
   }
 
@@ -259,6 +279,8 @@ export class Game extends BaseComponent {
     this.mistakes = 0;
     this.scores = 0;
     this.gameField.clear();
+    clearInterval(this.startInterval);
+    this.count_down = 15;
     clearInterval(this.timerInterval);
     this.clockFace.changeTime('00:00');
     this.elapsedTime = 0;
