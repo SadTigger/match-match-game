@@ -16,27 +16,27 @@ export class App {
 
   constructor(private readonly rootElement: HTMLElement) {}
 
-  private renderPage(idPage: string) {
+  private renderPage(pageId: string) {
     const currentPageHTML = document.querySelector(`#${App.defaultPageId}`);
     if (currentPageHTML) {
       currentPageHTML.remove();
     }
     let page: About | Scores | Settings | Game | ErrorPage | null = null;
     switch (true) {
-      case idPage === PageIds.AboutPage:
-        page = new About(idPage);
+      case pageId === PageIds.AboutPage:
+        page = new About(pageId);
         break;
-      case idPage === PageIds.ScoresPage:
-        page = new Scores(idPage);
+      case pageId === PageIds.ScoresPage:
+        page = new Scores(pageId);
         break;
-      case idPage === PageIds.SettingsPage:
-        page = new Settings(idPage);
+      case pageId === PageIds.SettingsPage:
+        page = new Settings(pageId);
         break;
-      case idPage === PageIds.GamePage:
-        page = new Game(idPage);
+      case pageId === PageIds.GamePage:
+        page = new Game(pageId);
         break;
       default:
-        page = new ErrorPage(idPage);
+        page = new ErrorPage(pageId);
         break;
     }
 
