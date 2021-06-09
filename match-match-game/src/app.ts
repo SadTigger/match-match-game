@@ -14,7 +14,7 @@ export const enum PageIds {
 export class App {
   private static defaultPageId = 'current-page';
   // for tests
-  // private static defaultPageId = 'game-page'; 
+  // private static defaultPageId = 'game-page';
 
   private readonly about: About;
 
