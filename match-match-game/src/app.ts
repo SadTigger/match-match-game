@@ -74,7 +74,7 @@ export class App {
   }
 
   run(): void {
-    this.renderPage(App.defaultPageId);
+    this.renderPage('about-page');
     this.enableRouteChange();
   }
 }
