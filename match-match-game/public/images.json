@@ -2,28 +2,47 @@
   {
     "category": "fate-servants",
     "images": [
+      "alter-ego.jpg",
       "archer.jpg",
       "assassin.jpg",
+      "avenger.jpg",
       "berserker.jpg",
       "caster.jpg",
       "lancer.jpg",
+      "mooncancer.jpg",
       "rider.jpg",
-      "saber.jpg",
-      "avenger.jpg"
+      "ruler.jpg",
+      "saber.jpg"
     ],
     "back": "fate-back.jpg"
   },
   {
     "category": "fgo",
     "images": [
-      "enkidu.jpg",
-      "fool.jpg",
-      "gilgamesh.jpg",
-      "hassan.jpg",
-      "magician.jpg",
-      "order.jpg",
-      "solomon.jpg",
-      "world.jpg"
+      "ace-of-cups.jpeg",
+      "ace-of-swords.jpeg",
+      "ace-of-wands.jpeg",
+      "chariot.jpeg",
+      "death.jpeg",
+      "devil.jpeg",
+      "emperor.jpeg",
+      "empress.jpeg",
+      "fate.jpeg",
+      "fool.jpeg",
+      "hanged-man.jpeg",
+      "hermit.jpeg",
+      "hierophant.jpeg",
+      "judgment.jpeg",
+      "justice.jpeg",
+      "magician.jpeg",
+      "priestess.jpeg",
+      "star.jpeg",
+      "strength.jpeg",
+      "sun.jpeg",
+      "temperance.jpeg",
+      "tower.jpeg",
+      "wheel-of-fortune.jpeg",
+      "world.jpeg"
     ],
     "back": "fgo-back.jpg"
   }

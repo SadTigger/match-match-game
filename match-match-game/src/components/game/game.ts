@@ -24,6 +24,7 @@ import { EndGameContent } from '../end-game-content/end-game-content';
 import { WinContainer } from '../win-container/win-container';
 import { TimeToString } from '../../shared/time-to-string';
 import { Settings } from '../settings/settings';
+import { Repeat } from '../../shared/repeat';
 
 const FLIP_DELAY = 3000;
 const TIMER_START = 15;
@@ -35,7 +36,15 @@ export const enum CardsImages {
   FSN = 'fate servants',
 }
 
+// export const enum GameDifficulty {
+//   easy = '4x4',
+//   medium = '6x6',
+//   hard = '8x8',
+// }
+
 export class Game extends BaseComponent {
+  public isStarted = false;
+
   private readonly header: Header;
 
   private readonly navbar: Navbar;
@@ -184,10 +193,33 @@ export class Game extends BaseComponent {
     this.gameFieldContainer.addField(this.gameField);
   }
 
-  newGame(images: string[], backImg: string): void {
+  newGame(images: string[], backImg: string, difficulty: string): void {
     this.gameField.clear();
-    const cards = images
-      .concat(images)
+    let chosenImages: string[];
+    switch (true) {
+      case difficulty === '4x4':
+        this.gameField.setFieldSize(4);
+        chosenImages = images.sort(() => Math.random() - 0.5).slice(0, 8);
+        break;
+      case difficulty === '6x6':
+        this.gameField.setFieldSize(6);
+        chosenImages = images.sort(() => Math.random() - 0.5);
+        chosenImages = Repeat(chosenImages, 3);
+        chosenImages = chosenImages.slice(0, 18);
+        break;
+      case difficulty === '8x8':
+        this.gameField.setFieldSize(8);
+        chosenImages = images.sort(() => Math.random() - 0.5);
+        chosenImages = Repeat(chosenImages, 4);
+        chosenImages = chosenImages.slice(0, 32);
+        break;
+      default:
+        this.gameField.setFieldSize(4);
+        chosenImages = images.sort(() => Math.random() - 0.5).slice(0, 8);
+        break;
+    }
+    const cards = chosenImages
+      .concat(chosenImages)
       .map(url => new Card(url, backImg))
       .sort(() => Math.random() - 0.5);
 
@@ -211,11 +243,13 @@ export class Game extends BaseComponent {
 
     // timer
     setTimeout(() => {
-      this.startTime = Date.now() - this.elapsedTime;
-      this.timerInterval = window.setInterval(() => {
-        this.elapsedTime = Date.now() - this.startTime;
-        this.clockFace.changeTime(TimeToString(this.elapsedTime));
-      }, 10);
+      if (this.isStarted) {
+        this.startTime = Date.now() - this.elapsedTime;
+        this.timerInterval = window.setInterval(() => {
+          this.elapsedTime = Date.now() - this.startTime;
+          this.clockFace.changeTime(TimeToString(this.elapsedTime));
+        }, 10);
+      }
     }, TIMER_START * 1000);
   }
 
@@ -271,12 +305,12 @@ export class Game extends BaseComponent {
   }
 
   async start(setupSettings: string[]): Promise<void> {
+    this.isStarted = true;
     this.steps = 0;
     this.mistakes = 0;
     this.scores = 0;
-    const res = await fetch('./images.json');
+    const res = await fetch(`./images.json`);
     const categories: ImageCategoryModel[] = await res.json();
-    // console.log('settings: ', setupSettings);
     switch (true) {
       case setupSettings[0] === CardsImages.FSN:
         this.cardSetting = 0;
@@ -295,10 +329,11 @@ export class Game extends BaseComponent {
     clearInterval(this.startInterval);
     clearInterval(this.timerInterval);
     this.clockFace.changeTime('00:00');
-    this.newGame(images, backImage);
+    this.newGame(images, backImage, setupSettings[1]);
   }
 
   stop(): void {
+    this.isStarted = false;
     this.steps = 0;
     this.mistakes = 0;
     this.scores = 0;
@@ -308,5 +343,9 @@ export class Game extends BaseComponent {
     clearInterval(this.timerInterval);
     this.clockFace.changeTime('00:00');
     this.elapsedTime = 0;
+  }
+
+  getGameStatus(): boolean {
+    return this.isStarted;
   }
 }

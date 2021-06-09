@@ -10,7 +10,11 @@ export class GameField extends BaseComponent {
   private cards: Card[] = [];
 
   constructor() {
-    super('div', ['game-field']);
+    super(
+      'div',
+      ['game-field'],
+      [{ name: 'style', value: 'grid-template-columns:  repeat(4, auto);' }],
+    );
   }
 
   clear(): void {
@@ -24,5 +28,9 @@ export class GameField extends BaseComponent {
     setTimeout(() => {
       this.cards.forEach(card => card.flipToBack());
     }, SHOW_TIME * 1000);
+  }
+
+  setFieldSize(size: number): void {
+    this.element.style.gridTemplateColumns = `repeat(${size}, auto)`;
   }
 }

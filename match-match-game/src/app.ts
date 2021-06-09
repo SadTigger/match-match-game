@@ -13,6 +13,8 @@ export const enum PageIds {
 
 export class App {
   private static defaultPageId = 'current-page';
+  // for tests
+  // private static defaultPageId = 'game-page'; 
 
   private readonly about: About;
 
@@ -34,7 +36,11 @@ export class App {
     if (currentPageHTML) {
       currentPageHTML.remove();
     }
+
     let page: About | Scores | Settings | Game | ErrorPage | null = null;
+
+    if (this.game.getGameStatus()) this.game.stop();
+
     switch (true) {
       case pageId === PageIds.AboutPage:
         page = this.about;
@@ -68,7 +74,7 @@ export class App {
   }
 
   run(): void {
-    this.renderPage('about-page');
+    this.renderPage(App.defaultPageId);
     this.enableRouteChange();
   }
 }
