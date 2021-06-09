@@ -13,7 +13,7 @@
 }
 
 .steps_row:last-child {
-  height: 240px;
+  height: auto;
 }
 
 .step {
