@@ -23,11 +23,17 @@ import { WinGameButton } from '../win-game-button/win-game-button';
 import { EndGameContent } from '../end-game-content/end-game-content';
 import { WinContainer } from '../win-container/win-container';
 import { TimeToString } from '../../shared/time-to-string';
+import { Settings } from '../settings/settings';
 
 const FLIP_DELAY = 3000;
 const TIMER_START = 15;
 // for tests
 // const TIMER_START = 2;
+
+export const enum CardsImages {
+  FGO = 'fate grand order',
+  FSN = 'fate servants',
+}
 
 export class Game extends BaseComponent {
   private readonly header: Header;
@@ -94,8 +100,13 @@ export class Game extends BaseComponent {
 
   private count_down = 15;
 
-  constructor(id: string) {
+  private cardSetting = 0;
+
+  private readonly settings: Settings;
+
+  constructor(id: string, settingsPage: Settings) {
     super('div', [id]);
+    this.settings = settingsPage;
     // header
     this.header = new Header();
     this.navbar = new Navbar();
@@ -134,7 +145,7 @@ export class Game extends BaseComponent {
       this.startGameButton.element.style.display = 'block';
     });
     this.startGameButton.element.addEventListener('click', () => {
-      this.start();
+      this.start(this.settings.getSettings());
       this.stopGameButton.element.style.display = 'block';
       this.startGameButton.element.style.display = 'none';
     });
@@ -259,13 +270,26 @@ export class Game extends BaseComponent {
     }
   }
 
-  async start(): Promise<void> {
+  async start(setupSettings: string[]): Promise<void> {
     this.steps = 0;
     this.mistakes = 0;
     this.scores = 0;
     const res = await fetch('./images.json');
     const categories: ImageCategoryModel[] = await res.json();
-    const cat = categories[1];
+    // console.log('settings: ', setupSettings);
+    switch (true) {
+      case setupSettings[0] === CardsImages.FSN:
+        this.cardSetting = 0;
+        break;
+      case setupSettings[0] === CardsImages.FGO:
+        this.cardSetting = 1;
+        break;
+      default:
+        this.cardSetting = 0;
+        break;
+    }
+
+    const cat = categories[this.cardSetting];
     const backImage = cat.back;
     const images = cat.images.map(name => `${cat.category}/${name}`);
     clearInterval(this.startInterval);

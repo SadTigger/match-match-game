@@ -15,7 +15,6 @@ import { NavbarCardList } from '../navbar-card-list/navbar-card-list';
 import { PopupModal } from '../popup-modal/popup-modal';
 import { HeaderButton } from '../header-button/header-button';
 import { Registration } from '../registration/registration';
-import { ConfirmSettingsButton } from '../confirm-settings-button/confirm-settings-button';
 
 export class Settings extends BaseComponent {
   private readonly header: Header;
@@ -67,8 +66,6 @@ export class Settings extends BaseComponent {
   private readonly option4: Option;
 
   private readonly option5: Option;
-
-  private readonly confirmButton: ConfirmSettingsButton;
 
   constructor(id: string) {
     super('div', [id]);
@@ -153,11 +150,17 @@ export class Settings extends BaseComponent {
     this.page.addToPage(this.gameSettings.element);
     this.page.addToPage(this.registrationPopupModal.element);
     this.gameSettings.element.appendChild(this.gameSettingsContainer.element);
-    this.confirmButton = new ConfirmSettingsButton();
     this.gameSettingsContainer.addSettings([
       this.settingItem1,
       this.settingItem2,
     ]);
-    this.gameSettingsContainer.addButton(this.confirmButton);
+  }
+
+  getSettings(): string[] {
+    const cards: HTMLOptionElement = this.element.querySelector('.cards')!;
+    const difficulty: HTMLOptionElement =
+      this.element.querySelector('.difficulty')!;
+
+    return [cards.value, difficulty.value];
   }
 }

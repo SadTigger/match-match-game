@@ -14,7 +14,20 @@ export const enum PageIds {
 export class App {
   private static defaultPageId = 'current-page';
 
-  constructor(private readonly rootElement: HTMLElement) {}
+  private readonly about: About;
+
+  private readonly scores: Scores;
+
+  private readonly settings: Settings;
+
+  private readonly game: Game;
+
+  constructor(private readonly rootElement: HTMLElement) {
+    this.about = new About('#about-page');
+    this.scores = new Scores('#about-page');
+    this.settings = new Settings('#about-page');
+    this.game = new Game('#game-page', this.settings);
+  }
 
   private renderPage(pageId: string) {
     const currentPageHTML = document.querySelector(`#${App.defaultPageId}`);
@@ -24,16 +37,16 @@ export class App {
     let page: About | Scores | Settings | Game | ErrorPage | null = null;
     switch (true) {
       case pageId === PageIds.AboutPage:
-        page = new About(pageId);
+        page = this.about;
         break;
       case pageId === PageIds.ScoresPage:
-        page = new Scores(pageId);
+        page = this.scores;
         break;
       case pageId === PageIds.SettingsPage:
-        page = new Settings(pageId);
+        page = this.settings;
         break;
       case pageId === PageIds.GamePage:
-        page = new Game(pageId);
+        page = this.game;
         break;
       default:
         page = new ErrorPage(pageId);
