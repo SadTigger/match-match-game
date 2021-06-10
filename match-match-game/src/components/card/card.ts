@@ -1,16 +1,20 @@
 import './card.css';
 import { BaseComponent } from '../base-component';
+import { CardMask } from '../card-mask/card-mask';
 
 const FLIP_CLASS = 'flipped';
 
 export class Card extends BaseComponent {
   isFlipped = false;
 
+  private readonly cardMask: CardMask;
+
   constructor(readonly image: string, readonly backImage: string) {
     super('div', ['card-container']);
     this.image = image;
     this.backImage = backImage;
     this.element.innerHTML = Card.getTemplate(this.image, this.backImage);
+    this.cardMask = new CardMask();
   }
 
   static getTemplate(image: string, backImage: string): string {
@@ -20,22 +24,13 @@ export class Card extends BaseComponent {
     </div>`;
   }
 
-  static getMaskTemplate(): string {
-    return `
-    <div class="mask">
-      <div class="icon-container">
-        <div class="mask-icon"></div>
-      </div>
-    </div>`;
-  }
-
   setDiscrepancyMask(): void {
-    this.element.innerHTML += Card.getMaskTemplate();
+    this.element.innerHTML += this.cardMask.element.outerHTML;
     this.element.classList.add('discrepancy');
   }
 
   setMatchMask(): void {
-    this.element.innerHTML += Card.getMaskTemplate();
+    this.element.innerHTML += this.cardMask.element.outerHTML;
     this.element.classList.add('match');
   }
 
