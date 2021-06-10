@@ -29,10 +29,10 @@ export class ErrorPage extends BaseComponent {
     );
     this.page = new Page();
     this.element.appendChild(this.page.element);
-    this.element.innerHTML = ErrorPage.getErrorTemplate(ErrorTypes.Error_404);
+    this.element.innerHTML = ErrorPage.getTemplate(ErrorTypes.Error_404);
   }
 
-  static getErrorTemplate(errorType: ErrorTypes | string): string {
+  static getTemplate(errorType: ErrorTypes | string): string {
     return `
     <div class="dialog">
       <p class="text">[404]</p>

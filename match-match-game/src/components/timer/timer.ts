@@ -7,7 +7,7 @@ export class Timer extends BaseComponent {
     super('div', ['timer']);
   }
 
-  addClockFace(clockFace: ClockFace): void {
+  getTemplate(clockFace: ClockFace): void {
     this.element.appendChild(clockFace.element);
   }
 }

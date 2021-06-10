@@ -5,10 +5,10 @@ import { SettingDropdown } from '../setting-dropdown/setting-dropdown';
 export class SettingItem extends BaseComponent {
   constructor(private settingTitle: string) {
     super('div', ['setting-item']);
-    this.element.innerHTML = SettingItem.addTitleText(settingTitle);
+    this.element.innerHTML = SettingItem.getTemplate(settingTitle);
   }
 
-  static addTitleText(text: string): string {
+  static getTemplate(text: string): string {
     return `<div class="setting__title">${text}</div>`;
   }
 

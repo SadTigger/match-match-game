@@ -10,22 +10,15 @@ export class Card extends BaseComponent {
     super('div', ['card-container']);
     this.image = image;
     this.backImage = backImage;
-    this.element.innerHTML = Card.getCardTemplate(this.image, this.backImage);
+    this.element.innerHTML = Card.getTemplate(this.image, this.backImage);
   }
 
-  static getCardTemplate(image: string, backImage: string): string {
+  static getTemplate(image: string, backImage: string): string {
     return `<div class="card">
       <div class="card-back" style="background-image: url(./assets/images/${image})"></div>
       <div class="card-front" style="background-image: url(./assets/images/game/${backImage})"></div>
     </div>`;
   }
-
-  // <div class="card-front" style="background-image: url('../../assets/images/${image}')">
-  // <div class="mask">
-  //   <div class="icon-container">
-  //     <div class="mask-icon"></div>
-  //   </div>
-  // </div>
 
   static getMaskTemplate(): string {
     return `
@@ -48,12 +41,12 @@ export class Card extends BaseComponent {
 
   removeDiscrepancyMask(): void {
     this.element.classList.remove('discrepancy');
-    this.element.innerHTML = Card.getCardTemplate(this.image, this.backImage);
+    this.element.innerHTML = Card.getTemplate(this.image, this.backImage);
   }
 
   removeMatchMask(): void {
     this.element.classList.remove('match');
-    this.element.innerHTML = Card.getCardTemplate(this.image, this.backImage);
+    this.element.innerHTML = Card.getTemplate(this.image, this.backImage);
   }
 
   flipToBack(): Promise<void> {

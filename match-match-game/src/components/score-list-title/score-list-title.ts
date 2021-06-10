@@ -4,10 +4,10 @@ import './score-list-title.css';
 export class ScoreListTitle extends BaseComponent {
   constructor() {
     super('div', ['score-list__title']);
-    this.element.innerHTML = ScoreListTitle.addTitleText();
+    this.element.innerHTML = ScoreListTitle.getTemplate();
   }
 
-  static addTitleText(title = 'Best players'): string {
+  static getTemplate(title = 'Best players'): string {
     return `${title}`;
   }
 }

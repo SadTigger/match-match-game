@@ -9,10 +9,10 @@ export class Player extends BaseComponent {
     private image: string,
   ) {
     super('div', ['score-item']);
-    this.element.innerHTML = Player.addPlayer(name, email, score, image);
+    this.element.innerHTML = Player.getTemplate(name, email, score, image);
   }
 
-  static addPlayer(
+  static getTemplate(
     name: string,
     email: string,
     score: number,

@@ -4,10 +4,10 @@ import { BaseComponent } from '../base-component';
 export class AboutTitle extends BaseComponent {
   constructor() {
     super('div', ['about__title']);
-    this.element.innerHTML = AboutTitle.addTitleText();
+    this.element.innerHTML = AboutTitle.getTemplate();
   }
 
-  static addTitleText(text = 'How to play?'): string {
+  static getTemplate(text = 'How to play?'): string {
     return text;
   }
 }
