@@ -4,10 +4,10 @@ import './clock-face.css';
 export class ClockFace extends BaseComponent {
   constructor() {
     super('span', ['clock-face']);
-    this.element.innerHTML = ClockFace.setDefaultTime();
+    this.element.innerHTML = ClockFace.getDefaultTimeTemplate();
   }
 
-  static setDefaultTime(): string {
+  static getDefaultTimeTemplate(): string {
     return `00:00`;
   }
 
