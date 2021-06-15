@@ -40,11 +40,11 @@ export const enum CardsImages {
   FSN = 'fate servants',
 }
 
-// export const enum GameDifficulty {
-//   easy = '4x4',
-//   medium = '6x6',
-//   hard = '8x8',
-// }
+const enum GameDifficulty {
+  easy = '4x4',
+  medium = '6x6',
+  hard = '8x8',
+}
 
 export class Game extends BaseComponent {
   public isStarted = false;
@@ -201,17 +201,17 @@ export class Game extends BaseComponent {
     this.gameField.clear();
     let chosenImages: string[];
     switch (true) {
-      case difficulty === '4x4':
+      case difficulty === GameDifficulty.easy:
         this.gameField.setFieldSize(4);
         chosenImages = images.sort(() => Math.random() - 0.5).slice(0, 8);
         break;
-      case difficulty === '6x6':
+      case difficulty === GameDifficulty.medium:
         this.gameField.setFieldSize(6);
         chosenImages = images.sort(() => Math.random() - 0.5);
         chosenImages = Repeat(chosenImages, 3);
         chosenImages = chosenImages.slice(0, 18);
         break;
-      case difficulty === '8x8':
+      case difficulty === GameDifficulty.hard:
         this.gameField.setFieldSize(8);
         chosenImages = images.sort(() => Math.random() - 0.5);
         chosenImages = Repeat(chosenImages, 4);
