@@ -11,7 +11,7 @@ export class Frame extends BaseComponent {
     private hint: string = '',
   ) {
     super('div', ['frame']);
-    this.element.innerHTML = Frame.getFrameContent(
+    this.element.innerHTML = Frame.getTemplate(
       name,
       frameTitle,
       type,
@@ -21,7 +21,7 @@ export class Frame extends BaseComponent {
     );
   }
 
-  static getFrameContent(
+  static getTemplate(
     name: string,
     frameTitle: string,
     type: string,
