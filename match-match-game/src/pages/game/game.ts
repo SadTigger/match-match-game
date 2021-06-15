@@ -27,6 +27,10 @@ import { Settings } from '../settings/settings';
 import { Repeat } from '../../shared/repeat';
 
 const FLIP_DELAY = 3000;
+const ZERO = 0;
+const TENS = 10;
+const ONE_HUNDRED = 100;
+const MS_TO_SECONDS = 0.001;
 const TIMER_START = 15;
 // for tests
 // const TIMER_START = 2;
@@ -93,23 +97,23 @@ export class Game extends BaseComponent {
 
   private isAnimation = false;
 
-  private scores = 0;
+  private scores = ZERO;
 
-  private mistakes = 0;
+  private mistakes = ZERO;
 
-  private steps = 0;
+  private steps = ZERO;
 
-  private startTime = 0;
+  private startTime = ZERO;
 
-  private elapsedTime = 0;
+  private elapsedTime = ZERO;
 
-  private timerInterval = 0;
+  private timerInterval = ZERO;
 
-  private startInterval = 0;
+  private startInterval = ZERO;
 
-  private countDown = 15;
+  private countDown = TIMER_START;
 
-  private cardSetting = 0;
+  private cardSetting = ZERO;
 
   private readonly settings: Settings;
 
@@ -233,12 +237,12 @@ export class Game extends BaseComponent {
     this.clockFace.changeTime('00:15');
     this.startInterval = window.setInterval(() => {
       this.countDown--;
-      if (this.countDown >= 10) {
+      if (this.countDown >= TENS) {
         this.clockFace.changeTime(`00:${this.countDown}`);
       } else {
         this.clockFace.changeTime(`00:0${this.countDown}`);
       }
-      if (this.countDown <= 0) clearInterval(this.startInterval);
+      if (this.countDown <= ZERO) clearInterval(this.startInterval);
     }, 1000);
 
     // timer
@@ -289,9 +293,9 @@ export class Game extends BaseComponent {
     if (fieldLength === matchedCards) {
       this.endGamePopup.element.style.display = 'flex';
       this.scores =
-        (this.steps - this.mistakes) * 100 -
-        Math.floor(this.elapsedTime * 0.001) * 10;
-      if (this.scores < 0) this.scores = 0;
+        (this.steps - this.mistakes) * ONE_HUNDRED -
+        Math.floor(this.elapsedTime * MS_TO_SECONDS) * TENS;
+      if (this.scores < 0) this.scores = ZERO;
       clearInterval(this.timerInterval);
       this.winContainer.getWinMessage(TimeToString(this.elapsedTime));
       this.winContainer.addButton(this.winGameButton);
@@ -306,20 +310,20 @@ export class Game extends BaseComponent {
 
   async start(setupSettings: string[]): Promise<void> {
     this.isStarted = true;
-    this.steps = 0;
-    this.mistakes = 0;
-    this.scores = 0;
+    this.steps = ZERO;
+    this.mistakes = ZERO;
+    this.scores = ZERO;
     const res = await fetch(`./images.json`);
     const categories: ImageCategoryModel[] = await res.json();
     switch (true) {
       case setupSettings[0] === CardsImages.FSN:
-        this.cardSetting = 0;
+        this.cardSetting = ZERO;
         break;
       case setupSettings[0] === CardsImages.FGO:
         this.cardSetting = 1;
         break;
       default:
-        this.cardSetting = 0;
+        this.cardSetting = ZERO;
         break;
     }
 
@@ -334,15 +338,15 @@ export class Game extends BaseComponent {
 
   stop(): void {
     this.isStarted = false;
-    this.steps = 0;
-    this.mistakes = 0;
-    this.scores = 0;
+    this.steps = ZERO;
+    this.mistakes = ZERO;
+    this.scores = ZERO;
     this.gameField.clear();
     clearInterval(this.startInterval);
-    this.countDown = 15;
+    this.countDown = TIMER_START;
     clearInterval(this.timerInterval);
     this.clockFace.changeTime('00:00');
-    this.elapsedTime = 0;
+    this.elapsedTime = ZERO;
   }
 
   getGameStatus(): boolean {
