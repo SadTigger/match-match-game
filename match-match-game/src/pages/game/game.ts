@@ -107,7 +107,7 @@ export class Game extends BaseComponent {
 
   private startInterval = 0;
 
-  private count_down = 15;
+  private countDown = 15;
 
   private cardSetting = 0;
 
@@ -232,13 +232,13 @@ export class Game extends BaseComponent {
     // count down
     this.clockFace.changeTime('00:15');
     this.startInterval = window.setInterval(() => {
-      this.count_down--;
-      if (this.count_down >= 10) {
-        this.clockFace.changeTime(`00:${this.count_down}`);
+      this.countDown--;
+      if (this.countDown >= 10) {
+        this.clockFace.changeTime(`00:${this.countDown}`);
       } else {
-        this.clockFace.changeTime(`00:0${this.count_down}`);
+        this.clockFace.changeTime(`00:0${this.countDown}`);
       }
-      if (this.count_down <= 0) clearInterval(this.startInterval);
+      if (this.countDown <= 0) clearInterval(this.startInterval);
     }, 1000);
 
     // timer
@@ -339,7 +339,7 @@ export class Game extends BaseComponent {
     this.scores = 0;
     this.gameField.clear();
     clearInterval(this.startInterval);
-    this.count_down = 15;
+    this.countDown = 15;
     clearInterval(this.timerInterval);
     this.clockFace.changeTime('00:00');
     this.elapsedTime = 0;
