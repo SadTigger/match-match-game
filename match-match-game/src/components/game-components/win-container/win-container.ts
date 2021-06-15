@@ -7,7 +7,7 @@ export class WinContainer extends BaseComponent {
     super('div', ['win-container']);
   }
 
-  getTemplate(time: string): void {
+  getWinMessage(time: string): void {
     this.element.innerHTML = `<p>Congratulations! You successfully found all matches on ${time} minutes.</p>`;
   }
 

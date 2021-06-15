@@ -293,7 +293,7 @@ export class Game extends BaseComponent {
         Math.floor(this.elapsedTime * 0.001) * 10;
       if (this.scores < 0) this.scores = 0;
       clearInterval(this.timerInterval);
-      this.winContainer.getTemplate(TimeToString(this.elapsedTime));
+      this.winContainer.getWinMessage(TimeToString(this.elapsedTime));
       this.winContainer.addButton(this.winGameButton);
       this.winGameButton.element.addEventListener('click', () => {
         this.endGamePopup.element.style.display = 'none';
