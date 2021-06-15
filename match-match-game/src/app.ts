@@ -1,8 +1,8 @@
-import { About } from './components/about/about';
-import { ErrorPage } from './components/error-page/error-page';
-import { Game } from './components/game/game';
-import { Scores } from './components/scores/scores';
-import { Settings } from './components/settings/settings';
+import { About } from './pages/about/about';
+import { ErrorPage } from './pages/error-page/error-page';
+import { Game } from './pages/game/game';
+import { Scores } from './pages/scores/scores';
+import { Settings } from './pages/settings/settings';
 
 export const enum PageIds {
   AboutPage = 'about-page',

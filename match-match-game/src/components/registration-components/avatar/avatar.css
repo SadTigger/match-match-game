@@ -1,0 +1,10 @@
+.avatar {
+  width: 165px;
+  height: 165px;
+  border-radius: 50%;
+}
+
+.avatar:hover {
+  background: rgba(196, 196, 196, 0.4);
+  background-image: url(../../../assets/icons/add.svg);
+}
