@@ -9,7 +9,7 @@ export class NavBarCard extends BaseComponent {
     readonly linkAddress: string,
   ) {
     super('li', []);
-    this.element.innerHTML = NavBarCard.getCardContent(
+    this.element.innerHTML = NavBarCard.getTemplate(
       state,
       name,
       title,
@@ -17,7 +17,7 @@ export class NavBarCard extends BaseComponent {
     );
   }
 
-  static getCardContent(
+  static getTemplate(
     state = '',
     name: string,
     title: string,
