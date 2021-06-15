@@ -37,32 +37,32 @@ export class App {
       currentPageHTML.remove();
     }
 
-    let page: About | Scores | Settings | Game | ErrorPage | null = null;
+    let page: HTMLElement | null = null;
 
     if (this.game.getGameStatus()) this.game.stop();
 
     switch (true) {
       case pageId === PageIds.AboutPage:
-        page = this.about;
+        page = this.about.element;
         break;
       case pageId === PageIds.ScoresPage:
-        page = this.scores;
+        page = this.scores.element;
         break;
       case pageId === PageIds.SettingsPage:
-        page = this.settings;
+        page = this.settings.element;
         break;
       case pageId === PageIds.GamePage:
-        page = this.game;
+        page = this.game.element;
         break;
       default:
-        page = new ErrorPage(pageId);
+        page = new ErrorPage(pageId).element;
         break;
     }
 
     if (page) {
-      const pageHTML = page.element;
-      pageHTML.id = App.defaultPageId;
-      this.rootElement.append(pageHTML);
+      page.id = App.defaultPageId;
+
+      this.rootElement.append(page);
     }
   }
 
